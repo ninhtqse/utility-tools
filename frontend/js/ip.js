@@ -1,6 +1,6 @@
 async function getIpInfo() {
     const ipInput = document.getElementById('ip-input').value;
-    const res = await fetch('http://localhost:3000/ip/ipapi', {
+    const res = await fetch('https://api-utility.ninhtqse.site/ip/ipapi', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ ip_address: ipInput })
