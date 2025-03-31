@@ -5,6 +5,10 @@ document.getElementById('imageInput').addEventListener('change', function (event
     if (file) {
         const reader = new FileReader();
         reader.onload = function (e) {
+            originalImage.onload = function () {
+                // Cập nhật kích thước gốc
+                document.getElementById('originalSize').innerText = `Original Size: ${originalImage.width} x ${originalImage.height}`;
+            };
             originalImage.src = e.target.result;
             document.getElementById('preview').src = e.target.result;
         };
