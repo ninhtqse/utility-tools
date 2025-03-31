@@ -1,6 +1,6 @@
 async function hashSHA256() {
     const text = document.getElementById('sha256-input').value;
-    const res = await fetch('http://localhost:3000/sha256', {
+    const res = await fetch('https://api-utility.ninhtqse.site/sha256', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ text })
@@ -11,7 +11,7 @@ async function hashSHA256() {
 
 async function hashMD5() {
     const password = document.getElementById('md5-input').value;
-    const res = await fetch('http://localhost:3000/md5', {
+    const res = await fetch('https://api-utility.ninhtqse.site/md5', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ password })
@@ -22,7 +22,7 @@ async function hashMD5() {
 
 async function hashBcrypt() {
     const password = document.getElementById('bcrypt-input').value;
-    const res = await fetch('http://localhost:3000/bcrypt', {
+    const res = await fetch('https://api-utility.ninhtqse.site/bcrypt', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ password })
@@ -33,7 +33,7 @@ async function hashBcrypt() {
 
 function encodeBase64() {
     const text = document.getElementById("base64-input").value;
-    fetch("http://localhost:3000/base64/encode", {
+    fetch("https://api-utility.ninhtqse.site/base64/encode", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ text })
@@ -45,7 +45,7 @@ function encodeBase64() {
 
 function decodeBase64() {
     const text = document.getElementById("base64-input").value;
-    fetch("http://localhost:3000/base64/decode", {
+    fetch("https://api-utility.ninhtqse.site/base64/decode", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ text })

@@ -1,5 +1,5 @@
 async function fetchUUID() {
-    const res = await fetch('http://localhost:3000/uuid');
+    const res = await fetch('https://api-utility.ninhtqse.site/uuid');
     const data = await res.json();
     document.getElementById('uuid').innerText = data.uuid;
 }

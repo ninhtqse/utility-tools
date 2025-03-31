@@ -1,6 +1,6 @@
 async function formatJSON() {
     const jsonInput = document.getElementById('json-input').value;
-    const res = await fetch('http://localhost:3000/json', {
+    const res = await fetch('https://api-utility.ninhtqse.site/json', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ json: jsonInput })
