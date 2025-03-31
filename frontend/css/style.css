@@ -5,7 +5,7 @@ body {
     background-color: #f4f4f4;
 }
 .container {
-    max-width: 1000px;
+    max-width: 1200px;
     margin: auto;
     background: white;
     padding: 20px;
@@ -259,3 +259,4 @@ button:hover {
     background: #0056b3;
 }
 
+canvas { display: none; }

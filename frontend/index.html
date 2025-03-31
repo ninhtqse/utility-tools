@@ -16,6 +16,7 @@
             <button class="tab-button" onclick="openTab(event, 'crontab-tools')">Crontab</button>
             <button class="tab-button" onclick="openTab(event, 'text-tools')">Text Tools</button>
             <button class="tab-button" onclick="openTab(event, 'miscellaneous-tools')">Miscellaneous Tools</button>
+            <button class="tab-button" onclick="openTab(event, 'image-tools')">Image Tools</button>
             <button class="tab-button" onclick="openTab(event, 'payment-tools')">Payment Tools</button>
         </div>
 
@@ -48,6 +49,19 @@
         </div>
 
         <div id="hash-tools" class="tab-content">
+            <div class="section">
+                <h2>JWT Encode</h2>
+                <textarea id="jwtPayload" placeholder='{"user": "admin", "role": "admin"}'></textarea>
+                <input type="text" id="jwtSecret" placeholder="Secret Key">
+                <button onclick="encodeJWT()">Encode JWT</button>
+                <pre class="output" id="jwtEncoded"></pre>
+            </div>
+            <div class="section">
+                <h2>JWT Decode</h2>
+                <textarea id="jwtInput" placeholder="Paste JWT here"></textarea>
+                <button onclick="decodeJWT()">Decode JWT</button>
+                <pre class="output" id="jwtDecoded"></pre>
+            </div>
             <div class="section">
                 <h2>Base64 Encode/Decode</h2>
                 <input type="text" id="base64-input" placeholder="Enter text">
@@ -142,17 +156,32 @@
             </div>
         </div>
 
+        <div id="image-tools" class="tab-content">
+            <div class="section">
+                <h2>Resize Image</h2>
+                <input type="file" id="imageInput" accept="image/*"><br>
+                <label>Width: <input type="number" id="widthInput" min="10"></label>
+                <label>Height: <input type="number" id="heightInput" min="10"></label>
+                <button onclick="resizeImage()">Resize</button>
+                <h3>Preview:</h3>
+                <img id="preview" style="max-width: 100%; border: 1px solid #ddd;">
+                <a id="downloadLink" style="display: none;" download="resized-image.png">Download Resized Image</a>
+
+                <canvas id="canvas"></canvas>
+            </div>
+        </div>
+
         <div id="payment-tools" class="tab-content">
             <div class="section">
                 <h2>Payment Tools</h2>
                 <div class="card-list">
-                    <div class="card-item" onclick="copyToClipboard(this, '4242424242424242')">Visa: 4242 4242 4242 4242 <span class="copied-message">Copied!</span></div>
-                    <div class="card-item" onclick="copyToClipboard(this, '5555555555554444')">Mastercard: 5555 5555 5555 4444 <span class="copied-message">Copied!</span></div>
-                    <div class="card-item" onclick="copyToClipboard(this, '4000002500003155')">3D Secure: 4000 0025 0000 3155 <span class="copied-message">Copied!</span></div>
-                    <div class="card-item" onclick="copyToClipboard(this, '4000000000000259')">Disputes (Fraudulent): 4000 0000 0000 0259 <span class="copied-message">Copied!</span></div>
-                    <div class="card-item" onclick="copyToClipboard(this, '4000000000007726')">Refunds: 4000 0000 0000 7726 <span class="copied-message">Copied!</span></div>
-                    <div class="card-item" onclick="copyToClipboard(this, '4000000000001208')">Captcha challenge: 4000 0000 0000 1208 <span class="copied-message">Copied!</span></div>
-                    <div class="card-item" onclick="copyToClipboard(this, '4000000000000341')">Decline after attaching: 4000 0000 0000 0341 <span class="copied-message">Copied!</span></div>
+                    <div class="card-item" onclick="copySingleToClipboard(this, '4242424242424242')">Visa: 4242 4242 4242 4242 <span class="copied-message">Copied!</span></div>
+                    <div class="card-item" onclick="copySingleToClipboard(this, '5555555555554444')">Mastercard: 5555 5555 5555 4444 <span class="copied-message">Copied!</span></div>
+                    <div class="card-item" onclick="copySingleToClipboard(this, '4000002500003155')">3D Secure: 4000 0025 0000 3155 <span class="copied-message">Copied!</span></div>
+                    <div class="card-item" onclick="copySingleToClipboard(this, '4000000000000259')">Disputes (Fraudulent): 4000 0000 0000 0259 <span class="copied-message">Copied!</span></div>
+                    <div class="card-item" onclick="copySingleToClipboard(this, '4000000000007726')">Refunds: 4000 0000 0000 7726 <span class="copied-message">Copied!</span></div>
+                    <div class="card-item" onclick="copySingleToClipboard(this, '4000000000001208')">Captcha challenge: 4000 0000 0000 1208 <span class="copied-message">Copied!</span></div>
+                    <div class="card-item" onclick="copySingleToClipboard(this, '4000000000000341')">Decline after attaching: 4000 0000 0000 0341 <span class="copied-message">Copied!</span></div>
                 </div>
                 <input type="text" id="stripe-public-key" placeholder="Enter Stripe Public Key">
                 <input type="text" id="stripe-client-secret" placeholder="Enter Client Secret">
@@ -169,6 +198,7 @@
 <script src="js/lib/jquery.min.js"></script>
 <script src="https://js.stripe.com/v3/"></script>
 <script src="js/lib/qrcode.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jsrsasign"></script>
 <script src="js/script.js" defer></script>
 <script src="js/json.js"></script>
 <script src="js/uuid.js"></script>
@@ -177,4 +207,5 @@
 <script src="js/payment.js" defer></script>
 <script src="js/text.js" defer></script>
 <script src="js/miscellaneous.js" defer></script>
+<script src="js/image.js" defer></script>
 </html>

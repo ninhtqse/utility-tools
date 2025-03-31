@@ -41,3 +41,19 @@ function copyToClipboard(preElement, button) {
         setTimeout(() => (button.innerText = "📋"), 1500);
     }).catch(err => console.error("Copy failed:", err));
 }
+
+function copySingleToClipboard(element, text) {
+    navigator.clipboard.writeText(text).then(() => {
+        const message = element.querySelector(".copied-message");
+
+        // Hiển thị thông báo bằng cách thay đổi display
+        message.style.display = "inline";
+
+        // Ẩn lại sau 1.5 giây
+        setTimeout(() => {
+            message.style.display = "none";
+        }, 1500);
+    }).catch(err => {
+        console.error("Failed to copy: ", err);
+    });
+}
