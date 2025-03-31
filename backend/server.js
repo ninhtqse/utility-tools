@@ -6,6 +6,7 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const FingerprintJS = require('@fingerprintjs/fingerprintjs');
 const cronstrue = require('cronstrue');
+const axios = require("axios");
 
 const app = express();
 const port = 3000;
@@ -83,6 +84,25 @@ app.post('/base64/decode', (req, res) => {
         res.json({ decoded });
     } catch (error) {
         res.status(400).json({ error: 'Invalid Base64 input' });
+    }
+});
+
+app.post("/ip/ipapi", async (req, res) => {
+    const { ip_address } = req.body;
+
+    if (!ip_address) {
+        return res.status(400).json({ error: "IP Address is required" });
+    }
+
+    try {
+        const apiKey = '9b308a1f4af49a2d';
+        const url = `https://api.ipapi.is?q=${ip_address}&key=${apiKey}`;
+
+        const response = await axios.get(url);
+        res.json(response.data);
+    } catch (error) {
+        console.error("Error fetching IP data:", error.message);
+        res.status(500).json({ error: "Failed to fetch IP information" });
     }
 });
 
