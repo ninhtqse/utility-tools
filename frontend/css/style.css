@@ -1,0 +1,261 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+    padding: 20px;
+    background-color: #f4f4f4;
+}
+.container {
+    max-width: 1000px;
+    margin: auto;
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+.tabs {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 10px;
+}
+.tab-button {
+    padding: 10px;
+    border: none;
+    background: #ddd;
+    cursor: pointer;
+    flex: 1;
+    text-align: center;
+    margin-right: 2px;
+}
+.tab-button.active {
+    background: #007bff;
+    color: white;
+}
+.tab-content {
+    display: none;
+}
+.tab-content.active {
+    display: block;
+}
+.section {
+    margin-bottom: 20px;
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background: #fff;
+}
+h2 {
+    margin-top: 0;
+}
+pre {
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    background: #f8f9fa;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    max-width: 100%;
+    overflow-x: auto;
+}
+textarea, input {
+    width: 100%;
+    padding: 10px 5px;
+    margin: 5px 0;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-family: monospace;
+}
+button {
+    margin-top: 5px;
+    padding: 8px 12px;
+    background: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+button:hover {
+    background: #0056b3;
+}
+.crontab-desc {
+    font-size: 75%;
+    color: #a8a8a8;
+}
+
+.StripeElement {
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+#payment-form {
+    max-width: 400px;
+    margin: auto;
+}
+#client-secret {
+    line-height: 25px;
+    margin-bottom: 10px;
+    width: 350px;
+}
+.card-list {
+    background: #f8f9fa;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    margin-bottom: 10px;
+}
+.card-item {
+    font-size: 75%;
+    cursor: pointer;
+    padding: 5px;
+    border-bottom: 1px solid #ddd;
+    position: relative;
+}
+.card-item:last-child {
+    border-bottom: none;
+}
+.copied-message {
+    display: none;
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 12px;
+    color: green;
+}
+.hidden {
+    display: none;
+}
+.show {
+    display: block;
+}
+#text-output, #lorem-output {
+    margin-top: 15px;
+}
+
+#text-output {
+    background: #f8f9fa;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    max-width: 100%;
+    overflow-x: auto;
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    white-space: pre-wrap;
+}
+
+.duplicate-word {
+    color: #dc3545;
+    font-weight: bold;
+    display: block;
+}
+
+.mt-20 {
+    margin-top: 20px !important;
+}
+
+#miscellaneous-tools .section {
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background: #fff;
+    margin: auto;
+}
+
+#miscellaneous-tools h2 {
+    margin-bottom: 15px;
+    font-size: 18px;
+    text-align: left;
+}
+
+.password-options {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.password-options label {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 14px;
+}
+
+.password-options input[type="number"] {
+    width: 80px;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    text-align: center;
+    font-size: 14px;
+}
+
+.password-options input[type="checkbox"] {
+    transform: scale(1.2);
+    margin-left: 10px;
+    width: auto;
+}
+
+.password-generate-btn {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    border-radius: 5px;
+    text-align: center;
+    font-size: 16px;
+    margin-top: 15px;
+    background: #007bff;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+.password-generate-btn:hover {
+    background: #0056b3;
+}
+
+.password-result {
+    margin-top: 15px;
+    font-size: 16px;
+    text-align: center;
+}
+
+.password-result span {
+    font-weight: bold;
+    color: #333;
+}
+
+.copy-container {
+    position: relative;
+    display: inline-block;
+    width: 100%;
+}
+
+.output {
+    padding: 10px;
+    background: #f8f9fa;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    overflow-x: auto;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    position: relative;
+}
+
+.copy-btn {
+    position: absolute;
+    top: 8px;
+    right: 1px;
+    background: #007bff;
+    color: white;
+    border: none;
+    padding: 5px 8px;
+    font-size: 9px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.copy-btn:hover {
+    background: #0056b3;
+}
+
