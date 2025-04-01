@@ -57,3 +57,17 @@ function copySingleToClipboard(element, text) {
         console.error("Failed to copy: ", err);
     });
 }
+
+function updateClock(id, timeZone, location) {
+    const options = { month: '2-digit', day: '2-digit', year: 'numeric', hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false, timeZone: timeZone };
+    document.getElementById(id).innerText = `${location}: ${new Date().toLocaleString('en-US', options)}`;
+}
+
+function updateClocks() {
+    updateClock('clock-vn', 'Asia/Ho_Chi_Minh', 'Vietnam');
+    updateClock('clock-jp', 'Asia/Tokyo', 'Japan');
+    updateClock('clock-us', 'America/Chicago', 'Chicago, USA');
+}
+
+setInterval(updateClocks, 1000);
+updateClocks();
