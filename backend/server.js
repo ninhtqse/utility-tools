@@ -106,6 +106,23 @@ app.post("/ip/ipapi", async (req, res) => {
     }
 });
 
+app.post("/run-php", async (req, res) => {
+    try {
+        const { code } = req.body;
+        const response = await axios.post('https://api.jdoodle.com/v1/execute', {
+            script: code,
+            language: "php",
+            versionIndex: "0",
+            clientId: "a4be9abaecf138bb3af6c382660c2ad3",
+            clientSecret: "ee9f8250e3840fac4d6ea0643fb2987d9ce8c03ab6b7cf7f7af7628876cf7b5"
+        });
+
+        res.json(response.data);
+    } catch (error) {
+        res.status(500).json({ error: "Failed to execute PHP code" });
+    }
+});
+
 // Start Server
 app.listen(port, () => {
     console.log(`Server running on http://localhost:${port}`);
