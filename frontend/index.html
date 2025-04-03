@@ -6,6 +6,11 @@
     <title>Utility Tools</title>
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment-timezone/0.5.43/moment-timezone-with-data.min.js"></script>
+    <script src="js/lib/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 </head>
 <body>
     <div class="app-container">
@@ -234,15 +239,18 @@
                             <div class="section">
                                 <h2>Timestamp Converter</h2>
                                 <p><strong>Current Timestamp:</strong> <span id="current-timestamp"></span></p>
-                                <label>Enter Timestamp:
-                                    <input type="number" id="timestamp-input" placeholder="Enter UNIX timestamp">
-                                </label>
-                                <label>Search Timezone:
-                                    <input type="text" id="timezone-search" placeholder="Search timezone...">
-                                </label>
-                                <label>Select Timezone:
-                                    <select id="timezone-select" size="5"></select>
-                                </label>
+                                <div class="form-group">
+                                    <label>Enter Timestamp:
+                                        <input type="number" id="timestamp-input" placeholder="Enter UNIX timestamp">
+                                    </label>
+                                </div>
+                                <div class="form-group">
+                                    <label>Select Timezone:
+                                        <select id="timezone-select" class="select2">
+                                            <option value="America/Chicago" selected>Chicago (America/Chicago)</option>
+                                        </select>
+                                    </label>
+                                </div>
                                 <button onclick="convertTimestamp()">Convert</button>
                                 <p><strong>Converted Time:</strong> <span id="timestamp-output"></span></p>
                             </div>
@@ -297,23 +305,22 @@
             </main>
         </div>
     </div>
-</body>
-<script src="js/lib/jquery.min.js"></script>
-<script src="https://js.stripe.com/v3/"></script>
-<script src="js/lib/qrcode.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/jsrsasign"></script>
-<script src="js/script.js?v=1743416366" defer></script>
-<script src="js/json.js?v=1743416365"></script>
-<script src="js/uuid.js?v=1743416365"></script>
-<script src="js/crontab.js?v=1743416365"></script>
-<script src="js/hashing.js?v=1743416365"></script>
-<script src="js/payment.js?v=1743416365" defer></script>
-<script src="js/text.js?v=1743416365" defer></script>
-<script src="js/miscellaneous.js?v=1743416365" defer></script>
-<script src="js/image.js?v=1743416365" defer></script>
-<script src="js/ip.js?v=1743416365" defer></script>
-<script src="js/timestamp.js?v=1743416365" defer></script>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.41.0/min/vs/loader.js"></script>
-<script src="js/php.js?v=1743416365" defer></script>
+    <script src="https://js.stripe.com/v3/"></script>
+    <script src="js/lib/qrcode.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jsrsasign"></script>
+    <script src="js/script.js?v=1743416366" defer></script>
+    <script src="js/json.js?v=1743416365"></script>
+    <script src="js/uuid.js?v=1743416365"></script>
+    <script src="js/crontab.js?v=1743416365"></script>
+    <script src="js/hashing.js?v=1743416365"></script>
+    <script src="js/payment.js?v=1743416365" defer></script>
+    <script src="js/text.js?v=1743416365" defer></script>
+    <script src="js/miscellaneous.js?v=1743416365" defer></script>
+    <script src="js/image.js?v=1743416365" defer></script>
+    <script src="js/ip.js?v=1743416365" defer></script>
+    <script src="js/timestamp.js?v=1743416365" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.41.0/min/vs/loader.js"></script>
+    <script src="js/php.js?v=1743416365" defer></script>
+</body>
 </html>

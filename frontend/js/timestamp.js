@@ -1,57 +1,44 @@
-document.addEventListener("DOMContentLoaded", function () {
-    const timezoneSelect = document.getElementById("timezone-select");
-    const timezoneSearch = document.getElementById("timezone-search");
-    const defaultTimezone = "Asia/Bangkok";
-    const timezones = Intl.supportedValuesOf("timeZone");
+// Initialize Select2 for timezone selection
+$(document).ready(function() {
+    const timezones = moment.tz.names().map(tz => ({
+        id: tz,
+        text: `${tz.replace(/_/g, ' ')} (${moment.tz(tz).format('Z')})`
+    }));
 
-    function populateTimezones(filter = "") {
-        timezoneSelect.innerHTML = "";
-        timezones.forEach(tz => {
-            if (tz.toLowerCase().includes(filter.toLowerCase())) {
-                let option = document.createElement("option");
-                option.value = tz;
-                option.textContent = tz;
-                timezoneSelect.appendChild(option);
-            }
-        });
-    }
-
-    // Load tất cả timezone và đặt mặc định là "Asia/Ho_Chi_Minh"
-    populateTimezones();
-    timezoneSelect.value = defaultTimezone;
-
-    // Lọc timezone khi nhập vào ô tìm kiếm
-    timezoneSearch.addEventListener("input", function () {
-        populateTimezones(this.value);
+    $('#timezone-select').select2({
+        data: timezones,
+        placeholder: 'Select a timezone',
+        allowClear: false,
+        width: '100%',
+        dropdownParent: $('#timestamp-tools')
     });
 
-    // Cập nhật timestamp hiện tại mỗi giây
-    function updateCurrentTimestamp() {
-        document.getElementById("current-timestamp").textContent = Math.floor(Date.now() / 1000);
-    }
-    updateCurrentTimestamp();
-    setInterval(updateCurrentTimestamp, 1000);
+    // Set default timezone to Chicago
+    $('#timezone-select').val('America/Chicago').trigger('change');
 });
 
 function convertTimestamp() {
-    const timestamp = parseInt(document.getElementById("timestamp-input").value) || Math.floor(Date.now() / 1000);
-    const selectedTimezone = document.getElementById("timezone-select").value;
-
-    if (isNaN(timestamp)) {
-        document.getElementById("timestamp-output").textContent = "Invalid timestamp!";
+    const timestamp = document.getElementById('timestamp-input').value;
+    const timezone = document.getElementById('timezone-select').value;
+    
+    if (!timestamp) {
+        document.getElementById('timestamp-output').textContent = 'Please enter a timestamp';
         return;
     }
 
-    const date = new Date(timestamp * 1000);
-    const formattedDate = new Intl.DateTimeFormat('en-US', {
-        timeZone: selectedTimezone,
-        year: 'numeric',
-        month: 'long',
-        day: 'numeric',
-        hour: '2-digit',
-        minute: '2-digit',
-        second: '2-digit'
-    }).format(date);
-
-    document.getElementById("timestamp-output").textContent = formattedDate;
+    const date = moment.unix(timestamp);
+    const convertedDate = date.tz(timezone);
+    
+    document.getElementById('timestamp-output').textContent = convertedDate.format('YYYY-MM-DD HH:mm:ss z');
 }
+
+// Update current timestamp
+function updateCurrentTimestamp() {
+    const timezone = document.getElementById('timezone-select').value;
+    const now = moment().tz(timezone);
+    document.getElementById('current-timestamp').textContent = now.unix();
+}
+
+// Update current timestamp every second
+setInterval(updateCurrentTimestamp, 1000);
+updateCurrentTimestamp();
