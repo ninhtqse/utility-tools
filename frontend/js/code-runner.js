@@ -51,11 +51,11 @@ async function runCode() {
     const code = window.editor.getValue();
     const language = $('#language-select').val();
     const outputArea = document.getElementById('code-output');
-    
+
     try {
         outputArea.innerHTML = '<div class="text-center"><div class="spinner-border text-primary" role="status"><span class="visually-hidden">Loading...</span></div></div>';
-        
-        const response = await fetch('http://localhost:3000/run-code', {
+
+        const response = await fetch('https://api-utility.ninhtqse.site/run-code', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -64,7 +64,7 @@ async function runCode() {
         });
 
         const data = await response.json();
-        
+
         if (data.error) {
             outputArea.innerHTML = `<div class="alert alert-danger">${data.error}</div>`;
         } else {
@@ -78,4 +78,4 @@ async function runCode() {
 // Clear output function
 function clearOutput() {
     document.getElementById('code-output').innerHTML = '';
-} 
+}
