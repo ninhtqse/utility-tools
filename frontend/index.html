@@ -11,6 +11,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment-timezone/0.5.43/moment-timezone-with-data.min.js"></script>
     <script src="js/lib/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.41.0/min/vs/loader.js"></script>
 </head>
 <body>
     <div class="app-container">
@@ -68,8 +69,8 @@
                         <span>Timestamp</span>
                     </button>
                     <button class="nav-item" onclick="openTab(event, 'php-tools')">
-                        <i class="fab fa-php"></i>
-                        <span>PHP Tools</span>
+                        <i class="fas fa-code"></i>
+                        <span>Code Runner</span>
                     </button>
                     <button class="nav-item" onclick="openTab(event, 'payment-tools')">
                         <i class="fas fa-credit-card"></i>
@@ -260,11 +261,35 @@
                     <div id="php-tools" class="tab-content">
                         <div class="section">
                             <div class="section">
-                                <h2>PHP Code Runner</h2>
-                                <div style="display: flex; flex-direction: column; gap: 10px;">
-                                    <div id="monaco-container" style="height: 300px; border: 1px solid #ddd;"></div>
-                                    <button onclick="runPHPCode()">Run PHP</button>
-                                    <pre id="php-output" style="background: #282c34; color: white; padding: 10px; border-radius: 5px;"></pre>
+                                <h2>Code Runner</h2>
+                                <div class="code-runner-container">
+                                    <div class="form-group">
+                                        <label>Select Language:
+                                            <select id="language-select" class="select2">
+                                                <option value="php">PHP</option>
+                                                <option value="javascript">JavaScript</option>
+                                                <option value="python">Python</option>
+                                                <option value="java">Java</option>
+                                                <option value="cpp">C++</option>
+                                                <option value="csharp">C#</option>
+                                                <option value="ruby">Ruby</option>
+                                                <option value="go">Go</option>
+                                                <option value="rust">Rust</option>
+                                                <option value="swift">Swift</option>
+                                            </select>
+                                        </label>
+                                    </div>
+                                    <div class="editor-container">
+                                        <div id="monaco-container"></div>
+                                    </div>
+                                    <div class="editor-controls">
+                                        <button onclick="runCode()">Run Code</button>
+                                        <button onclick="clearOutput()">Clear Output</button>
+                                    </div>
+                                    <div class="output-container">
+                                        <h3>Output:</h3>
+                                        <pre id="code-output" class="output"></pre>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -320,7 +345,6 @@
     <script src="js/image.js?v=1743416365" defer></script>
     <script src="js/ip.js?v=1743416365" defer></script>
     <script src="js/timestamp.js?v=1743416365" defer></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.41.0/min/vs/loader.js"></script>
-    <script src="js/php.js?v=1743416365" defer></script>
+    <script src="js/code-runner.js?v=1743416365" defer></script>
 </body>
 </html>

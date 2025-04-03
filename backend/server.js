@@ -106,20 +106,41 @@ app.post("/ip/ipapi", async (req, res) => {
     }
 });
 
-app.post("/run-php", async (req, res) => {
+app.post("/run-code", async (req, res) => {
     try {
-        const { code } = req.body;
+        const { code, language } = req.body;
+        
+        // Map language to JDoodle language codes
+        const languageMap = {
+            'php': { code: 'php', version: '0' },
+            'javascript': { code: 'nodejs', version: '4' },
+            'python': { code: 'python3', version: '4' },
+            'java': { code: 'java', version: '4' },
+            'cpp': { code: 'cpp', version: '5' },
+            'csharp': { code: 'csharp', version: '4' },
+            'ruby': { code: 'ruby', version: '4' },
+            'go': { code: 'go', version: '4' },
+            'rust': { code: 'rust', version: '4' },
+            'swift': { code: 'swift', version: '4' }
+        };
+
+        const langConfig = languageMap[language];
+        if (!langConfig) {
+            return res.status(400).json({ error: 'Unsupported programming language' });
+        }
+
         const response = await axios.post('https://api.jdoodle.com/v1/execute', {
             script: code,
-            language: "php",
-            versionIndex: "0",
+            language: langConfig.code,
+            versionIndex: langConfig.version,
             clientId: "a4be9abaecf138bb3af6c382660c2ad3",
             clientSecret: "ee9f8250e3840fac4d6ea0643fb2987d9ce8c03ab6b7cf7f7af7628876cf7b5"
         });
 
         res.json(response.data);
     } catch (error) {
-        res.status(500).json({ error: "Failed to execute PHP code" });
+        console.error('Code execution error:', error);
+        res.status(500).json({ error: "Failed to execute code" });
     }
 });
 
