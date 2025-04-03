@@ -1,33 +1,62 @@
 async function formatJSON() {
     const jsonInput = document.getElementById('json-input').value;
-    const res = await fetch('http://localhost:3000/json', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ json: jsonInput })
-    });
-    const data = await res.json();
-    document.getElementById('json-output').innerText = data.success ? data.formattedJson : 'Invalid JSON';
+    const output = document.getElementById('json-output');
+    const treeContainer = document.getElementById('json-tree');
+    
+    // Hide tree view and show output
+    treeContainer.style.display = 'none';
+    output.style.display = 'block';
+    
+    try {
+        const res = await fetch('http://localhost:3000/json/format', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ json: jsonInput })
+        });
+        const data = await res.json();
+        output.innerText = data.success ? data.formattedJson : 'Invalid JSON';
+    } catch (error) {
+        output.innerText = 'Error formatting JSON';
+    }
 }
 
 async function minifyJSON() {
     const jsonInput = document.getElementById('json-input').value;
-    const res = await fetch('http://localhost:3000/json/minify', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ json: jsonInput })
-    });
-    const data = await res.json();
-    document.getElementById('json-output').innerText = data.success ? data.minifiedJson : 'Invalid JSON';
+    const output = document.getElementById('json-output');
+    const treeContainer = document.getElementById('json-tree');
+    
+    // Hide tree view and show output
+    treeContainer.style.display = 'none';
+    output.style.display = 'block';
+    
+    try {
+        const res = await fetch('http://localhost:3000/json/minify', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ json: jsonInput })
+        });
+        const data = await res.json();
+        output.innerText = data.success ? data.minifiedJson : 'Invalid JSON';
+    } catch (error) {
+        output.innerText = 'Error minifying JSON';
+    }
 }
 
 function encodeJSON() {
     const jsonInput = document.getElementById('json-input').value;
+    const output = document.getElementById('json-output');
+    const treeContainer = document.getElementById('json-tree');
+    
+    // Hide tree view and show output
+    treeContainer.style.display = 'none';
+    output.style.display = 'block';
+    
     try {
         // Convert text to JSON string by escaping special characters
         const encodedJson = JSON.stringify(jsonInput);
-        document.getElementById('json-output').innerText = encodedJson;
+        output.innerText = encodedJson;
     } catch (error) {
-        document.getElementById('json-output').innerText = 'Invalid input for JSON encoding';
+        output.innerText = 'Invalid input for JSON encoding';
     }
 }
 
@@ -76,25 +105,50 @@ function renderJson(data) {
     let html = '<ul style="padding-left: 1em; list-style: none;">';
     
     if (typeof data === 'object' && data !== null) {
-        for (const [key, value] of Object.entries(data)) {
+        const isArray = Array.isArray(data);
+        const entries = Object.entries(data);
+        
+        // Show object/array header
+        html += `
+            <li>
+                <div class="toggle-node" style="cursor: pointer;">
+                    ▼ <span class="json-type">${isArray ? 'array' : 'object'}</span>
+                    <span class="json-bracket">${isArray ? '[' : '{'}</span>
+                    <span class="json-count">${entries.length} items</span>
+                    <span class="json-bracket">${isArray ? ']' : '}'}</span>
+                </div>
+                <div class="nested-content" style="display: block;">
+                    <ul style="padding-left: 20px; list-style: none;">`;
+        
+        // Add items
+        entries.forEach(([key, value]) => {
             if (typeof value === 'object' && value !== null) {
+                const isValueArray = Array.isArray(value);
+                const valueEntries = Object.entries(value);
                 html += `
-                    <li style="margin-bottom: 0.5em;">
+                    <li>
                         <div class="toggle-node" style="cursor: pointer;">
-                            ▶ <span class="json-key">${key}:</span>
+                            ▼ <span class="json-key">${key}</span>
+                            <span class="json-type">${isValueArray ? 'array' : 'object'}</span>
+                            <span class="json-bracket">${isValueArray ? '[' : '{'}</span>
+                            <span class="json-count">${valueEntries.length} items</span>
+                            <span class="json-bracket">${isValueArray ? ']' : '}'}</span>
                         </div>
-                        <div class="nested-content" style="display: none;">
+                        <div class="nested-content" style="display: block;">
                             ${renderJson(value)}
                         </div>
                     </li>`;
             } else {
                 html += `
                     <li class="json-item">
-                        <span class="json-key">${key}:</span>
+                        <span class="json-key">${key}</span>
+                        <span class="json-colon">:</span>
                         <span class="json-value">${JSON.stringify(value)}</span>
                     </li>`;
             }
-        }
+        });
+        
+        html += '</ul></div></li>';
     } else {
         html += `<li class="json-value">${JSON.stringify(data)}</li>`;
     }
