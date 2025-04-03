@@ -193,7 +193,67 @@
                                         </div>
                                     </div>
                                     <div class="regex-pattern-container">
-                                        <input type="text" id="regex-pattern" placeholder="Enter regex pattern">
+                                        <div class="regex-pattern-header">
+                                            <input type="text" id="regex-pattern" placeholder="Enter regex pattern">
+                                            <button class="suggest-btn" onclick="toggleSuggestPanel()">
+                                                <i class="fas fa-lightbulb"></i>
+                                                Suggest Pattern
+                                            </button>
+                                        </div>
+                                        <div id="regex-suggestions" class="regex-suggestions">
+                                            <div class="suggestion-group">
+                                                <h4>Email & URLs</h4>
+                                                <div class="suggestion-item" data-pattern="^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$" data-desc="Email address">
+                                                    <div class="suggestion-title">Email Address</div>
+                                                    <div class="suggestion-example">example@domain.com</div>
+                                                </div>
+                                                <div class="suggestion-item" data-pattern="^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?$" data-desc="URL">
+                                                    <div class="suggestion-title">URL</div>
+                                                    <div class="suggestion-example">https://www.example.com</div>
+                                                </div>
+                                            </div>
+                                            <div class="suggestion-group">
+                                                <h4>Numbers</h4>
+                                                <div class="suggestion-item" data-pattern="^[0-9]+$" data-desc="Numbers only">
+                                                    <div class="suggestion-title">Numbers Only</div>
+                                                    <div class="suggestion-example">12345</div>
+                                                </div>
+                                                <div class="suggestion-item" data-pattern="^\d{1,3}(,\d{3})*(\.\d+)?$" data-desc="Currency format">
+                                                    <div class="suggestion-title">Currency Format</div>
+                                                    <div class="suggestion-example">1,234.56</div>
+                                                </div>
+                                                <div class="suggestion-item" data-pattern="^-?\d*\.?\d+$" data-desc="Decimal number">
+                                                    <div class="suggestion-title">Decimal Number</div>
+                                                    <div class="suggestion-example">-123.456</div>
+                                                </div>
+                                            </div>
+                                            <div class="suggestion-group">
+                                                <h4>Dates & Times</h4>
+                                                <div class="suggestion-item" data-pattern="^\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01])$" data-desc="YYYY-MM-DD">
+                                                    <div class="suggestion-title">Date (YYYY-MM-DD)</div>
+                                                    <div class="suggestion-example">2024-03-15</div>
+                                                </div>
+                                                <div class="suggestion-item" data-pattern="^([01]?[0-9]|2[0-3]):[0-5][0-9]$" data-desc="24-hour time">
+                                                    <div class="suggestion-title">Time (24-hour)</div>
+                                                    <div class="suggestion-example">23:59</div>
+                                                </div>
+                                            </div>
+                                            <div class="suggestion-group">
+                                                <h4>Common Formats</h4>
+                                                <div class="suggestion-item" data-pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$" data-desc="Password">
+                                                    <div class="suggestion-title">Password (Letters & Numbers)</div>
+                                                    <div class="suggestion-example">Pass123word</div>
+                                                </div>
+                                                <div class="suggestion-item" data-pattern="^\+?[\d\s-]{10,}$" data-desc="Phone number">
+                                                    <div class="suggestion-title">Phone Number</div>
+                                                    <div class="suggestion-example">+1 234-567-8900</div>
+                                                </div>
+                                                <div class="suggestion-item" data-pattern="^[a-zA-Z]:\\(?:[^\\/:*?"<>|\r\n]+\\)*[^\\/:*?"<>|\r\n]*$" data-desc="Windows path">
+                                                    <div class="suggestion-title">Windows File Path</div>
+                                                    <div class="suggestion-example">C:\folder\file.txt</div>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                                 

@@ -165,4 +165,43 @@ document.getElementById('regex-test').addEventListener('input', updateRegex);
 document.getElementById('regex-language').addEventListener('change', updateRegex);
 document.querySelectorAll('.regex-flags input').forEach(input => {
     input.addEventListener('change', updateRegex);
+});
+
+// Suggestion panel functions
+function toggleSuggestPanel() {
+    const panel = document.getElementById('regex-suggestions');
+    panel.classList.toggle('show');
+}
+
+// Close suggestions when clicking outside
+document.addEventListener('click', (e) => {
+    const panel = document.getElementById('regex-suggestions');
+    const suggestBtn = e.target.closest('.suggest-btn');
+    const suggestions = e.target.closest('.regex-suggestions');
+    
+    if (!suggestBtn && !suggestions) {
+        panel.classList.remove('show');
+    }
+});
+
+// Handle suggestion clicks
+document.querySelectorAll('.suggestion-item').forEach(item => {
+    item.addEventListener('click', () => {
+        const pattern = item.getAttribute('data-pattern');
+        const patternInput = document.getElementById('regex-pattern');
+        patternInput.value = pattern;
+        
+        // Close suggestion panel
+        document.getElementById('regex-suggestions').classList.remove('show');
+        
+        // Update regex test with example if test area is empty
+        const testInput = document.getElementById('regex-test');
+        if (!testInput.value) {
+            const example = item.querySelector('.suggestion-example').textContent;
+            testInput.value = example;
+        }
+        
+        // Trigger regex update
+        updateRegex();
+    });
 }); 
