@@ -58,6 +58,10 @@
                         <i class="fas fa-clock"></i>
                         <span>Crontab</span>
                     </button>
+                    <button class="nav-item" onclick="openTab(event, 'regex-tools')">
+                        <i class="fas fa-code"></i>
+                        <span>Regex</span>
+                    </button>
                     <button class="nav-item" onclick="openTab(event, 'text-tools')">
                         <i class="fas fa-font"></i>
                         <span>Text Tools</span>
@@ -171,6 +175,52 @@
                             </p>
                             <button onclick="convertCrontab()">Convert</button>
                             <pre class="output" id="crontab-output"></pre>
+                        </div>
+                    </div>
+
+                    <div id="regex-tools" class="tab-content">
+                        <div class="section">
+                            <h2>Regular Expression Tester</h2>
+                            <div class="regex-container">
+                                <div class="regex-input-group">
+                                    <div class="regex-header">
+                                        <label>Regular Expression:</label>
+                                        <div class="regex-flags">
+                                            <label title="Global"><input type="checkbox" id="flag-g" checked> g</label>
+                                            <label title="Case Insensitive"><input type="checkbox" id="flag-i"> i</label>
+                                            <label title="Multiline"><input type="checkbox" id="flag-m"> m</label>
+                                            <label title="Single Line (dotall)"><input type="checkbox" id="flag-s"> s</label>
+                                        </div>
+                                    </div>
+                                    <div class="regex-pattern-container">
+                                        <input type="text" id="regex-pattern" placeholder="Enter regex pattern">
+                                    </div>
+                                </div>
+                                
+                                <div class="regex-language">
+                                    <label>Language:</label>
+                                    <select id="regex-language">
+                                        <option value="javascript">JavaScript</option>
+                                        <option value="php">PHP</option>
+                                        <option value="python">Python</option>
+                                        <option value="java">Java</option>
+                                    </select>
+                                </div>
+
+                                <div class="regex-test-container">
+                                    <label>Test String:</label>
+                                    <textarea id="regex-test" placeholder="Enter test string"></textarea>
+                                </div>
+
+                                <div class="regex-results">
+                                    <h3>Results:</h3>
+                                    <div id="regex-matches" class="regex-matches"></div>
+                                    <div id="regex-code" class="regex-code">
+                                        <h4>Sample Code:</h4>
+                                        <pre><code id="regex-code-sample"></code></pre>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
 
@@ -378,6 +428,7 @@
     <script src="js/json.js"></script>
     <script src="js/uuid.js"></script>
     <script src="js/crontab.js"></script>
+    <script src="js/regex.js"></script>
     <script src="js/hashing.js"></script>
     <script src="js/payment.js" defer></script>
     <script src="js/text.js" defer></script>

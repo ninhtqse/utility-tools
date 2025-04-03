@@ -905,3 +905,139 @@ canvas { display: none; }
     font-weight: bold;
     color: #444;
 }
+
+/* Regex Tester Styles */
+.regex-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.regex-input-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.regex-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.regex-flags {
+    display: flex;
+    gap: 1rem;
+}
+
+.regex-flags label {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+    cursor: pointer;
+}
+
+.regex-flags input[type="checkbox"] {
+    width: auto;
+    margin: 0;
+}
+
+.regex-pattern-container {
+    position: relative;
+}
+
+.regex-pattern-container input {
+    font-family: 'Fira Code', monospace;
+    font-size: 1rem;
+    padding: 0.75rem;
+}
+
+.regex-language {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.regex-language select {
+    padding: 0.5rem;
+    border: 1px solid var(--border-color);
+    border-radius: 0.375rem;
+    font-size: 0.875rem;
+}
+
+.regex-test-container {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.regex-test-container textarea {
+    min-height: 150px;
+    font-family: 'Fira Code', monospace;
+    font-size: 0.875rem;
+    line-height: 1.5;
+}
+
+.regex-results {
+    background: var(--bg-color);
+    padding: 1rem;
+    border-radius: 0.375rem;
+    border: 1px solid var(--border-color);
+}
+
+.regex-matches {
+    font-family: 'Fira Code', monospace;
+    margin-bottom: 1rem;
+}
+
+.regex-match {
+    padding: 0.5rem;
+    background: rgba(37, 99, 235, 0.1);
+    border-radius: 0.25rem;
+    margin-bottom: 0.5rem;
+}
+
+.regex-match:last-child {
+    margin-bottom: 0;
+}
+
+.regex-match-index {
+    color: var(--primary-color);
+    font-weight: 500;
+}
+
+.regex-match-value {
+    color: #1a1aa6;
+}
+
+.regex-code {
+    margin-top: 1rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--border-color);
+}
+
+.regex-code h4 {
+    margin: 0 0 0.5rem 0;
+    font-size: 0.875rem;
+    font-weight: 600;
+}
+
+.regex-code pre {
+    background: #282c34;
+    color: #abb2bf;
+    padding: 1rem;
+    border-radius: 0.375rem;
+    overflow-x: auto;
+    margin: 0;
+}
+
+.regex-code code {
+    font-family: 'Fira Code', monospace;
+    font-size: 0.875rem;
+    line-height: 1.5;
+}
+
+.regex-highlight {
+    background-color: rgba(37, 99, 235, 0.2);
+    border-radius: 0.125rem;
+}
