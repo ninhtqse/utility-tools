@@ -8,7 +8,7 @@ async function formatJSON() {
     output.style.display = 'block';
     
     try {
-        const res = await fetch('http://localhost:3000/json/format', {
+        const res = await fetch('http://localhost:3000/json', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ json: jsonInput })
