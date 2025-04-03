@@ -725,3 +725,50 @@ canvas { display: none; }
     opacity: 1;
     background: var(--primary-hover);
 }
+
+.json-tree {
+    display: none;
+    margin-top: 20px;
+    padding: 15px;
+    background: #f8f9fa;
+    border-radius: 4px;
+    font-family: monospace;
+    max-height: 500px;
+    overflow-y: auto;
+}
+
+.json-tree ul {
+    list-style: none;
+    padding-left: 20px;
+    margin: 0;
+}
+
+.json-tree li {
+    margin-bottom: 5px;
+}
+
+.toggle-node {
+    cursor: pointer;
+    user-select: none;
+}
+
+.json-key {
+    color: #881391;
+    font-weight: bold;
+}
+
+.json-value {
+    color: #1a1aa6;
+}
+
+.json-value.null {
+    color: #1c00cf;
+}
+
+.json-value.number {
+    color: #1c00cf;
+}
+
+.json-value.boolean {
+    color: #1c00cf;
+}
