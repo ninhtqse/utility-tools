@@ -66,16 +66,23 @@ function copySingleToClipboard(element, text) {
     });
 }
 
-function updateClock(id, timeZone, location) {
-    const options = { month: '2-digit', day: '2-digit', year: 'numeric', hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false, timeZone: timeZone };
-    document.getElementById(id).innerText = `${location}: ${new Date().toLocaleString('en-US', options)}`;
-}
-
+// Update clocks
 function updateClocks() {
-    updateClock('clock-vn', 'Asia/Ho_Chi_Minh', 'Vietnam');
-    updateClock('clock-jp', 'Asia/Tokyo', 'Japan');
-    updateClock('clock-us', 'America/Chicago', 'Chicago, USA');
+    const now = moment();
+    
+    // Vietnam (UTC+7)
+    const vnTime = now.clone().tz('Asia/Ho_Chi_Minh');
+    document.querySelector('#clock-vn .time').textContent = vnTime.format('HH:mm DD/MM');
+    
+    // Japan (UTC+9)
+    const jpTime = now.clone().tz('Asia/Tokyo');
+    document.querySelector('#clock-jp .time').textContent = jpTime.format('HH:mm DD/MM');
+    
+    // US (UTC-5)
+    const usTime = now.clone().tz('America/New_York');
+    document.querySelector('#clock-us .time').textContent = usTime.format('HH:mm DD/MM');
 }
 
+// Update clocks every second
 setInterval(updateClocks, 1000);
 updateClocks();
