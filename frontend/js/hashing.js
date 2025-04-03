@@ -75,7 +75,6 @@ function decodeBase64() {
         .catch(error => console.error("Error decoding Base64:", error));
 }
 
-
 function encodeJWT() {
     try {
         const payloadInput = document.getElementById("jwtPayload").value;
@@ -98,13 +97,26 @@ function encodeJWT() {
     }
 }
 
+function encodeURL() {
+    const input = document.getElementById('url-input').value;
+    if (!input) {
+        alert('Please enter a URL');
+        return;
+    }
+    const encoded = encodeURIComponent(input);
+    document.getElementById('url-output').textContent = encoded;
+}
 
-function decodeJWT() {
+function decodeURL() {
+    const input = document.getElementById('url-input').value;
+    if (!input) {
+        alert('Please enter an encoded URL');
+        return;
+    }
     try {
-        const jwt = document.getElementById("jwtInput").value;
-        const decoded = KJUR.jws.JWS.parse(jwt);
-        document.getElementById("jwtDecoded").innerText = JSON.stringify(decoded.payloadObj, null, 2);
+        const decoded = decodeURIComponent(input);
+        document.getElementById('url-output').textContent = decoded;
     } catch (error) {
-        alert("Invalid JWT!");
+        alert('Invalid encoded URL');
     }
 }
