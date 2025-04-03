@@ -1,48 +1,153 @@
-let originalImage = new Image();
+// Drag and drop functionality
+const dropZone = document.getElementById('dropZone');
+const fileInput = document.getElementById('imageInput');
+const previewContainer = document.getElementById('imagePreviewContainer');
+const preview = document.getElementById('preview');
+const originalSize = document.getElementById('originalSize');
+const widthInput = document.getElementById('widthInput');
+const heightInput = document.getElementById('heightInput');
+const maintainAspect = document.getElementById('maintainAspect');
+const downloadLink = document.getElementById('downloadLink');
+const canvas = document.getElementById('canvas');
+const ctx = canvas.getContext('2d');
 
-document.getElementById('imageInput').addEventListener('change', function (event) {
-    const file = event.target.files[0];
-    if (file) {
-        const reader = new FileReader();
-        reader.onload = function (e) {
-            originalImage.onload = function () {
-                // Cập nhật kích thước gốc
-                document.getElementById('originalSize').innerText = `Original Size: ${originalImage.width} x ${originalImage.height}`;
-            };
-            originalImage.src = e.target.result;
-            document.getElementById('preview').src = e.target.result;
-        };
-        reader.readAsDataURL(file);
+let originalImage = null;
+
+// Prevent default drag behaviors
+['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
+    dropZone.addEventListener(eventName, preventDefaults, false);
+    document.body.addEventListener(eventName, preventDefaults, false);
+});
+
+// Highlight drop zone when dragging over it
+['dragenter', 'dragover'].forEach(eventName => {
+    dropZone.addEventListener(eventName, highlight, false);
+});
+
+['dragleave', 'drop'].forEach(eventName => {
+    dropZone.addEventListener(eventName, unhighlight, false);
+});
+
+// Handle dropped files
+dropZone.addEventListener('drop', handleDrop, false);
+
+// Handle click to upload
+dropZone.addEventListener('click', () => fileInput.click());
+
+// Handle file selection
+fileInput.addEventListener('change', handleFileSelect);
+
+// Handle maintain aspect ratio checkbox
+maintainAspect.addEventListener('change', () => {
+    if (maintainAspect.checked && originalImage) {
+        const ratio = originalImage.width / originalImage.height;
+        const newWidth = parseInt(widthInput.value);
+        heightInput.value = Math.round(newWidth / ratio);
     }
 });
 
+// Handle width input change
+widthInput.addEventListener('input', () => {
+    if (maintainAspect.checked && originalImage) {
+        const ratio = originalImage.width / originalImage.height;
+        const newWidth = parseInt(widthInput.value);
+        heightInput.value = Math.round(newWidth / ratio);
+    }
+});
+
+// Handle height input change
+heightInput.addEventListener('input', () => {
+    if (maintainAspect.checked && originalImage) {
+        const ratio = originalImage.width / originalImage.height;
+        const newHeight = parseInt(heightInput.value);
+        widthInput.value = Math.round(newHeight * ratio);
+    }
+});
+
+function preventDefaults(e) {
+    e.preventDefault();
+    e.stopPropagation();
+}
+
+function highlight(e) {
+    dropZone.classList.add('dragover');
+}
+
+function unhighlight(e) {
+    dropZone.classList.remove('dragover');
+}
+
+function handleDrop(e) {
+    const dt = e.dataTransfer;
+    const files = dt.files;
+    handleFiles(files);
+}
+
+function handleFileSelect(e) {
+    const files = e.target.files;
+    handleFiles(files);
+}
+
+function handleFiles(files) {
+    if (files.length > 0) {
+        const file = files[0];
+        if (file.type.startsWith('image/')) {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                originalImage = new Image();
+                originalImage.onload = function() {
+                    // Set original size info
+                    originalSize.textContent = `${originalImage.width} x ${originalImage.height} pixels`;
+                    
+                    // Set initial dimensions
+                    widthInput.value = originalImage.width;
+                    heightInput.value = originalImage.height;
+                    
+                    // Show preview
+                    preview.src = e.target.result;
+                    previewContainer.style.display = 'block';
+                    dropZone.style.display = 'none';
+                };
+                originalImage.src = e.target.result;
+            };
+            reader.readAsDataURL(file);
+        } else {
+            alert('Please upload an image file.');
+        }
+    }
+}
+
+function closePreview() {
+    previewContainer.style.display = 'none';
+    dropZone.style.display = 'block';
+    originalImage = null;
+    preview.src = '';
+    downloadLink.style.display = 'none';
+}
+
 function resizeImage() {
-    const width = parseInt(document.getElementById('widthInput').value);
-    const height = parseInt(document.getElementById('heightInput').value);
-    const canvas = document.getElementById('canvas');
-    const ctx = canvas.getContext('2d');
+    if (!originalImage) return;
 
-    if (!originalImage.src) {
-        alert("Please upload an image first!");
+    const newWidth = parseInt(widthInput.value);
+    const newHeight = parseInt(heightInput.value);
+
+    if (newWidth < 10 || newHeight < 10) {
+        alert('Dimensions must be at least 10 pixels.');
         return;
     }
 
-    if (!width || !height) {
-        alert("Please enter valid width and height!");
-        return;
-    }
+    // Set canvas dimensions
+    canvas.width = newWidth;
+    canvas.height = newHeight;
 
-    canvas.width = width;
-    canvas.height = height;
-    ctx.drawImage(originalImage, 0, 0, width, height);
+    // Draw resized image
+    ctx.drawImage(originalImage, 0, 0, newWidth, newHeight);
 
-    // Hiển thị ảnh sau khi resize
-    const resizedImage = canvas.toDataURL("image/png");
-    document.getElementById('preview').src = resizedImage;
-
-    // Cập nhật link download
-    const downloadLink = document.getElementById('downloadLink');
-    downloadLink.href = resizedImage;
-    downloadLink.style.display = "block";
-    downloadLink.innerText = "Download Resized Image";
+    // Update preview
+    preview.src = canvas.toDataURL('image/png');
+    
+    // Show download button
+    downloadLink.href = canvas.toDataURL('image/png');
+    downloadLink.download = 'resized-image.png';
+    downloadLink.style.display = 'inline-flex';
 }
