@@ -197,30 +197,14 @@ button:hover {
     font-size: 0.875rem;
 }
 
-.tabs {
-    display: flex;
-    justify-content: space-around;
-    margin-bottom: 10px;
-}
-.tab-button {
-    padding: 10px;
-    border: none;
-    background: #ddd;
-    cursor: pointer;
-    flex: 1;
-    text-align: center;
-    margin-right: 2px;
-}
-.tab-button.active {
-    background: #007bff;
-    color: white;
-}
 .tab-content {
     display: none;
 }
+
 .tab-content.active {
     display: block;
 }
+
 pre {
     white-space: pre-wrap;
     word-wrap: break-word;
@@ -231,6 +215,7 @@ pre {
     max-width: 100%;
     overflow-x: auto;
 }
+
 .crontab-desc {
     font-size: 75%;
     color: #a8a8a8;
@@ -242,15 +227,18 @@ pre {
     border: 1px solid #ccc;
     border-radius: 4px;
 }
+
 #payment-form {
     max-width: 400px;
     margin: auto;
 }
+
 #client-secret {
     line-height: 25px;
     margin-bottom: 10px;
     width: 350px;
 }
+
 .card-list {
     background: #f8f9fa;
     padding: 10px;
@@ -258,6 +246,7 @@ pre {
     border: 1px solid #ddd;
     margin-bottom: 10px;
 }
+
 .card-item {
     font-size: 75%;
     cursor: pointer;
@@ -265,9 +254,11 @@ pre {
     border-bottom: 1px solid #ddd;
     position: relative;
 }
+
 .card-item:last-child {
     border-bottom: none;
 }
+
 .copied-message {
     display: none;
     position: absolute;
@@ -277,12 +268,15 @@ pre {
     font-size: 12px;
     color: green;
 }
+
 .hidden {
     display: none;
 }
+
 .show {
     display: block;
 }
+
 #text-output, #lorem-output {
     margin-top: 15px;
 }
