@@ -24,6 +24,16 @@ app.post('/json', (req, res) => {
     }
 });
 
+// Minify JSON
+app.post('/json/minify', (req, res) => {
+    try {
+        const minifiedJson = JSON.stringify(JSON.parse(req.body.json));
+        res.json({ success: true, minifiedJson });
+    } catch (error) {
+        res.json({ success: false, error: 'Invalid JSON' });
+    }
+});
+
 // Generate UUID
 app.get('/uuid', (req, res) => {
     res.json({ uuid: uuidv4() });

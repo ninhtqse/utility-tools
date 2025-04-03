@@ -9,12 +9,24 @@ async function formatJSON() {
     document.getElementById('json-output').innerText = data.success ? data.formattedJson : 'Invalid JSON';
 }
 
+async function minifyJSON() {
+    const jsonInput = document.getElementById('json-input').value;
+    const res = await fetch('http://localhost:3000/json/minify', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ json: jsonInput })
+    });
+    const data = await res.json();
+    document.getElementById('json-output').innerText = data.success ? data.minifiedJson : 'Invalid JSON';
+}
+
 function encodeJSON() {
-    const textInput = document.getElementById('json-encode-input').value;
+    const jsonInput = document.getElementById('json-input').value;
     try {
-        const encodedJson = JSON.stringify(JSON.parse(textInput));
-        document.getElementById('json-encode-output').innerText = encodedJson;
+        // Convert text to JSON string by escaping special characters
+        const encodedJson = JSON.stringify(jsonInput);
+        document.getElementById('json-output').innerText = encodedJson;
     } catch (error) {
-        document.getElementById('json-encode-output').innerText = 'Invalid input for JSON encoding';
+        document.getElementById('json-output').innerText = 'Invalid input for JSON encoding';
     }
 }
