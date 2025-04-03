@@ -5,246 +5,316 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Utility Tools</title>
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
-    <div class="container">
-        <h1>Utility Tools</h1>
-
-        <div class="clock-container">
-            <div class="clock" id="clock-vn"></div>
-            <div class="clock" id="clock-jp"></div>
-            <div class="clock" id="clock-us"></div>
-        </div>
-
-        <div class="tabs">
-            <button class="tab-button active" onclick="openTab(event, 'json-tools')">JSON Tools</button>
-            <button class="tab-button" onclick="openTab(event, 'uuid-tools')">UUID & Fingerprint</button>
-            <button class="tab-button" onclick="openTab(event, 'hash-tools')">Hashing</button>
-            <button class="tab-button" onclick="openTab(event, 'crontab-tools')">Crontab</button>
-            <button class="tab-button" onclick="openTab(event, 'text-tools')">Text Tools</button>
-            <button class="tab-button" onclick="openTab(event, 'miscellaneous-tools')">Miscellaneous Tools</button>
-            <button class="tab-button" onclick="openTab(event, 'image-tools')">Image Tools</button>
-            <button class="tab-button" onclick="openTab(event, 'ip-tools')">IP Tools</button>
-            <button class="tab-button" onclick="openTab(event, 'timestamp-tools')">Timestamp Tools</button>
-            <button class="tab-button" onclick="openTab(event, 'php-tools')">PHP Tools</button>
-            <button class="tab-button" onclick="openTab(event, 'payment-tools')">Payment Tools</button>
-        </div>
-
-        <div id="json-tools" class="tab-content active">
-            <div class="section">
-                <h2>Decode & Format JSON</h2>
-                <textarea id="json-input" placeholder="Enter JSON"></textarea>
-                <button onclick="formatJSON()">Format</button>
-                <pre class="output" id="json-output"></pre>
-            </div>
-            <div class="section">
-                <h2>Encode JSON</h2>
-                <textarea id="json-encode-input" placeholder="Enter text to encode"></textarea>
-                <button onclick="encodeJSON()">Encode</button>
-                <pre class="output" id="json-encode-output"></pre>
-            </div>
-        </div>
-
-        <div id="uuid-tools" class="tab-content">
-            <div class="section">
-                <h2>Generate UUID</h2>
-                <button onclick="fetchUUID()">Generate</button>
-                <pre class="output" id="uuid"></pre>
-            </div>
-            <div class="section">
-                <h2>FingerprintJS</h2>
-                <button onclick="fetchFingerprint()">Get Fingerprint</button>
-                <pre class="output" id="fingerprint"></pre>
-            </div>
-        </div>
-
-        <div id="hash-tools" class="tab-content">
-            <div class="section">
-                <h2>JWT Encode</h2>
-                <textarea id="jwtPayload" placeholder='{"user": "admin", "role": "admin"}'></textarea>
-                <input type="text" id="jwtSecret" placeholder="Secret Key">
-                <button onclick="encodeJWT()">Encode JWT</button>
-                <pre class="output" id="jwtEncoded"></pre>
-            </div>
-            <div class="section">
-                <h2>JWT Decode</h2>
-                <textarea id="jwtInput" placeholder="Paste JWT here"></textarea>
-                <button onclick="decodeJWT()">Decode JWT</button>
-                <pre class="output" id="jwtDecoded"></pre>
-            </div>
-            <div class="section">
-                <h2>Base64 Encode/Decode</h2>
-                <input type="text" id="base64-input" placeholder="Enter text">
-                <button onclick="encodeBase64()">Encode</button>
-                <button onclick="decodeBase64()">Decode</button>
-                <pre class="output" id="base64-output"></pre>
-            </div>
-            <div class="section">
-                <h2>MD5 Hash</h2>
-                <input type="text" id="md5-input" placeholder="Enter text">
-                <button onclick="hashMD5()">Hash</button>
-                <pre class="output" id="md5-output"></pre>
-            </div>
-            <div class="section">
-                <h2>Bcrypt Hash</h2>
-                <input type="text" id="bcrypt-input" placeholder="Enter password">
-                <button onclick="hashBcrypt()">Hash</button>
-                <pre class="output" id="bcrypt-output"></pre>
-            </div>
-            <div class="section">
-                <h2>SHA-256 Hash</h2>
-                <input type="text" id="sha256-input" placeholder="Enter text">
-                <button onclick="hashSHA256()">Hash</button>
-                <pre class="output" id="sha256-output"></pre>
-            </div>
-        </div>
-
-        <div id="crontab-tools" class="tab-content">
-            <div class="section">
-                <h2>Crontab Converter</h2>
-                <input type="text" id="crontab-input" placeholder="Enter crontab expression" value="* * * * *">
-                <p>
-                    <span class="crontab-desc">Minute</span> -
-                    <span class="crontab-desc">Hour</span> -
-                    <span class="crontab-desc">Day (Month)</span> -
-                    <span class="crontab-desc">Month</span> -
-                    <span class="crontab-desc">Day (Week)</span>
-                </p>
-                <button onclick="convertCrontab()">Convert</button>
-                <pre class="output" id="crontab-output"></pre>
-            </div>
-        </div>
-
-        <div id="text-tools" class="tab-content">
-            <div class="section">
-                <h2>Case Convertor</h2>
-                <textarea id="text-input" placeholder="Enter your text here..."></textarea>
-                <button onclick="convertToSentenceCase()">Sentence Case</button>
-                <button onclick="convertToUpperCase()">UPPER CASE</button>
-                <button onclick="convertToLowerCase()">lower case</button>
-                <button onclick="countLetters()">Letter Counter</button>
-                <pre class="output" id="text-output"></pre>
-            </div>
-            <div class="section">
-                <h2>Lorem Ipsum Generator</h2>
-                <div>
-                    <label>Paragraph Count:</label>
-                    <input type="number" id="lorem-paragraphs" value="1" min="1">
-                    <label>Avg. Words Per Sentence:</label>
-                    <input type="number" id="lorem-words" value="10" min="5">
-                    <label>Total Characters:</label>
-                    <input type="number" id="lorem-chars" value="100" min="50">
-                    <button onclick="generateLoremIpsum()">Generate Lorem Ipsum</button>
-                    <pre class="output" id="lorem-output"></pre>
+    <div class="app-container">
+        <header class="main-header">
+            <div class="header-content">
+                <div class="logo">
+                    <i class="fas fa-tools"></i>
+                    <h1>Utility Tools</h1>
+                </div>
+                <div class="clock-container">
+                    <div class="clock" id="clock-vn"></div>
+                    <div class="clock" id="clock-jp"></div>
+                    <div class="clock" id="clock-us"></div>
                 </div>
             </div>
-        </div>
+        </header>
 
-        <div id="miscellaneous-tools" class="tab-content">
-            <div class="section">
-                <h2>Generate Password</h2>
-                <div class="password-options">
-                    <label>
-                        <span>Password Length:</span>
-                        <input type="number" id="password-length" min="6" max="50" value="12">
-                    </label>
-                    <label><span>Include <b>lowercase</b> letters</span> <input type="checkbox" id="include-lower" checked></label>
-                    <label><span>Include <b>uppercase</b> letters</span> <input type="checkbox" id="include-upper" checked></label>
-                    <label><span>Include <b>numbers</b></span> <input type="checkbox" id="include-numbers" checked></label>
-                    <label><span>Include <b>symbols (!#$%&*+-=?@^_{}[]()/'"`~,;:.<>\)</b></span> <input type="checkbox" id="include-symbols" checked></label>
+        <div class="main-content">
+            <nav class="sidebar">
+                <div class="sidebar-content">
+                    <button class="nav-item active" onclick="openTab(event, 'json-tools')">
+                        <i class="fas fa-code"></i>
+                        <span>JSON Tools</span>
+                    </button>
+                    <button class="nav-item" onclick="openTab(event, 'uuid-tools')">
+                        <i class="fas fa-fingerprint"></i>
+                        <span>UUID & Fingerprint</span>
+                    </button>
+                    <button class="nav-item" onclick="openTab(event, 'hash-tools')">
+                        <i class="fas fa-hashtag"></i>
+                        <span>Hashing</span>
+                    </button>
+                    <button class="nav-item" onclick="openTab(event, 'crontab-tools')">
+                        <i class="fas fa-clock"></i>
+                        <span>Crontab</span>
+                    </button>
+                    <button class="nav-item" onclick="openTab(event, 'text-tools')">
+                        <i class="fas fa-font"></i>
+                        <span>Text Tools</span>
+                    </button>
+                    <button class="nav-item" onclick="openTab(event, 'miscellaneous-tools')">
+                        <i class="fas fa-puzzle-piece"></i>
+                        <span>Miscellaneous</span>
+                    </button>
+                    <button class="nav-item" onclick="openTab(event, 'image-tools')">
+                        <i class="fas fa-image"></i>
+                        <span>Image Tools</span>
+                    </button>
+                    <button class="nav-item" onclick="openTab(event, 'ip-tools')">
+                        <i class="fas fa-network-wired"></i>
+                        <span>IP Tools</span>
+                    </button>
+                    <button class="nav-item" onclick="openTab(event, 'timestamp-tools')">
+                        <i class="fas fa-calendar-alt"></i>
+                        <span>Timestamp</span>
+                    </button>
+                    <button class="nav-item" onclick="openTab(event, 'php-tools')">
+                        <i class="fab fa-php"></i>
+                        <span>PHP Tools</span>
+                    </button>
+                    <button class="nav-item" onclick="openTab(event, 'payment-tools')">
+                        <i class="fas fa-credit-card"></i>
+                        <span>Payment Tools</span>
+                    </button>
                 </div>
-                <button class="password-generate-btn" onclick="generatePassword()">Generate</button>
-                <p class="password-result"><strong>Password:</strong> <span id="password-output"></span></p>
-                <p class="password-result"><strong>Strength:</strong> <span id="password-strength"></span></p>
-            </div>
-            <div class="section mt-20">
-                <h2>QR Code Generator</h2>
-                <input type="text" id="qr-input" placeholder="Enter text or URL">
-                <button onclick="generateQRCode()">Generate QR</button>
-                <button onclick="downloadQRCode()">Download QR</button>
-                <div class="mt-20" id="qr-output"></div>
-            </div>
-        </div>
+            </nav>
 
-        <div id="image-tools" class="tab-content">
-            <div class="section">
-                <h2>Resize Image</h2>
-                <input type="file" id="imageInput" accept="image/*"><br>
-                <label>Width: <input type="number" id="widthInput" min="10"></label>
-                <label>Height: <input type="number" id="heightInput" min="10"></label>
-                <button onclick="resizeImage()">Resize</button>
-                <h3>Preview:</h3>
-                <p id="originalSize"></p>
-                <img id="preview" style="max-width: 100%; border: 1px solid #ddd;">
-                <a id="downloadLink" style="display: none;" download="resized-image.png">Download Resized Image</a>
+            <main class="content-area">
+                <div class="container">
+                    <h1>Utility Tools</h1>
 
-                <canvas id="canvas"></canvas>
-            </div>
-        </div>
+                    <div class="clock-container">
+                        <div class="clock" id="clock-vn"></div>
+                        <div class="clock" id="clock-jp"></div>
+                        <div class="clock" id="clock-us"></div>
+                    </div>
 
-        <div id="timestamp-tools" class="tab-content">
-            <div class="section">
-                <div class="section">
-                    <h2>Timestamp Converter</h2>
-                    <p><strong>Current Timestamp:</strong> <span id="current-timestamp"></span></p>
-                    <label>Enter Timestamp:
-                        <input type="number" id="timestamp-input" placeholder="Enter UNIX timestamp">
-                    </label>
-                    <label>Search Timezone:
-                        <input type="text" id="timezone-search" placeholder="Search timezone...">
-                    </label>
-                    <label>Select Timezone:
-                        <select id="timezone-select" size="5"></select>
-                    </label>
-                    <button onclick="convertTimestamp()">Convert</button>
-                    <p><strong>Converted Time:</strong> <span id="timestamp-output"></span></p>
-                </div>
-            </div>
-        </div>
+                    <div class="tabs">
+                        <button class="tab-button active" onclick="openTab(event, 'json-tools')">JSON Tools</button>
+                        <button class="tab-button" onclick="openTab(event, 'uuid-tools')">UUID & Fingerprint</button>
+                        <button class="tab-button" onclick="openTab(event, 'hash-tools')">Hashing</button>
+                        <button class="tab-button" onclick="openTab(event, 'crontab-tools')">Crontab</button>
+                        <button class="tab-button" onclick="openTab(event, 'text-tools')">Text Tools</button>
+                        <button class="tab-button" onclick="openTab(event, 'miscellaneous-tools')">Miscellaneous Tools</button>
+                        <button class="tab-button" onclick="openTab(event, 'image-tools')">Image Tools</button>
+                        <button class="tab-button" onclick="openTab(event, 'ip-tools')">IP Tools</button>
+                        <button class="tab-button" onclick="openTab(event, 'timestamp-tools')">Timestamp Tools</button>
+                        <button class="tab-button" onclick="openTab(event, 'php-tools')">PHP Tools</button>
+                        <button class="tab-button" onclick="openTab(event, 'payment-tools')">Payment Tools</button>
+                    </div>
 
-        <div id="php-tools" class="tab-content">
-            <div class="section">
-                <div class="section">
-                    <h2>PHP Code Runner</h2>
-                    <div style="display: flex; flex-direction: column; gap: 10px;">
-                        <div id="monaco-container" style="height: 300px; border: 1px solid #ddd;"></div>
-                        <button onclick="runPHPCode()">Run PHP</button>
-                        <pre id="php-output" style="background: #282c34; color: white; padding: 10px; border-radius: 5px;"></pre>
+                    <div id="json-tools" class="tab-content active">
+                        <div class="section">
+                            <h2>Decode & Format JSON</h2>
+                            <textarea id="json-input" placeholder="Enter JSON"></textarea>
+                            <button onclick="formatJSON()">Format</button>
+                            <pre class="output" id="json-output"></pre>
+                        </div>
+                        <div class="section">
+                            <h2>Encode JSON</h2>
+                            <textarea id="json-encode-input" placeholder="Enter text to encode"></textarea>
+                            <button onclick="encodeJSON()">Encode</button>
+                            <pre class="output" id="json-encode-output"></pre>
+                        </div>
+                    </div>
+
+                    <div id="uuid-tools" class="tab-content">
+                        <div class="section">
+                            <h2>Generate UUID</h2>
+                            <button onclick="fetchUUID()">Generate</button>
+                            <pre class="output" id="uuid"></pre>
+                        </div>
+                        <div class="section">
+                            <h2>FingerprintJS</h2>
+                            <button onclick="fetchFingerprint()">Get Fingerprint</button>
+                            <pre class="output" id="fingerprint"></pre>
+                        </div>
+                    </div>
+
+                    <div id="hash-tools" class="tab-content">
+                        <div class="section">
+                            <h2>JWT Encode</h2>
+                            <textarea id="jwtPayload" placeholder='{"user": "admin", "role": "admin"}'></textarea>
+                            <input type="text" id="jwtSecret" placeholder="Secret Key">
+                            <button onclick="encodeJWT()">Encode JWT</button>
+                            <pre class="output" id="jwtEncoded"></pre>
+                        </div>
+                        <div class="section">
+                            <h2>JWT Decode</h2>
+                            <textarea id="jwtInput" placeholder="Paste JWT here"></textarea>
+                            <button onclick="decodeJWT()">Decode JWT</button>
+                            <pre class="output" id="jwtDecoded"></pre>
+                        </div>
+                        <div class="section">
+                            <h2>Base64 Encode/Decode</h2>
+                            <input type="text" id="base64-input" placeholder="Enter text">
+                            <button onclick="encodeBase64()">Encode</button>
+                            <button onclick="decodeBase64()">Decode</button>
+                            <pre class="output" id="base64-output"></pre>
+                        </div>
+                        <div class="section">
+                            <h2>MD5 Hash</h2>
+                            <input type="text" id="md5-input" placeholder="Enter text">
+                            <button onclick="hashMD5()">Hash</button>
+                            <pre class="output" id="md5-output"></pre>
+                        </div>
+                        <div class="section">
+                            <h2>Bcrypt Hash</h2>
+                            <input type="text" id="bcrypt-input" placeholder="Enter password">
+                            <button onclick="hashBcrypt()">Hash</button>
+                            <pre class="output" id="bcrypt-output"></pre>
+                        </div>
+                        <div class="section">
+                            <h2>SHA-256 Hash</h2>
+                            <input type="text" id="sha256-input" placeholder="Enter text">
+                            <button onclick="hashSHA256()">Hash</button>
+                            <pre class="output" id="sha256-output"></pre>
+                        </div>
+                    </div>
+
+                    <div id="crontab-tools" class="tab-content">
+                        <div class="section">
+                            <h2>Crontab Converter</h2>
+                            <input type="text" id="crontab-input" placeholder="Enter crontab expression" value="* * * * *">
+                            <p>
+                                <span class="crontab-desc">Minute</span> -
+                                <span class="crontab-desc">Hour</span> -
+                                <span class="crontab-desc">Day (Month)</span> -
+                                <span class="crontab-desc">Month</span> -
+                                <span class="crontab-desc">Day (Week)</span>
+                            </p>
+                            <button onclick="convertCrontab()">Convert</button>
+                            <pre class="output" id="crontab-output"></pre>
+                        </div>
+                    </div>
+
+                    <div id="text-tools" class="tab-content">
+                        <div class="section">
+                            <h2>Case Convertor</h2>
+                            <textarea id="text-input" placeholder="Enter your text here..."></textarea>
+                            <button onclick="convertToSentenceCase()">Sentence Case</button>
+                            <button onclick="convertToUpperCase()">UPPER CASE</button>
+                            <button onclick="convertToLowerCase()">lower case</button>
+                            <button onclick="countLetters()">Letter Counter</button>
+                            <pre class="output" id="text-output"></pre>
+                        </div>
+                        <div class="section">
+                            <h2>Lorem Ipsum Generator</h2>
+                            <div>
+                                <label>Paragraph Count:</label>
+                                <input type="number" id="lorem-paragraphs" value="1" min="1">
+                                <label>Avg. Words Per Sentence:</label>
+                                <input type="number" id="lorem-words" value="10" min="5">
+                                <label>Total Characters:</label>
+                                <input type="number" id="lorem-chars" value="100" min="50">
+                                <button onclick="generateLoremIpsum()">Generate Lorem Ipsum</button>
+                                <pre class="output" id="lorem-output"></pre>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="miscellaneous-tools" class="tab-content">
+                        <div class="section">
+                            <h2>Generate Password</h2>
+                            <div class="password-options">
+                                <label>
+                                    <span>Password Length:</span>
+                                    <input type="number" id="password-length" min="6" max="50" value="12">
+                                </label>
+                                <label><span>Include <b>lowercase</b> letters</span> <input type="checkbox" id="include-lower" checked></label>
+                                <label><span>Include <b>uppercase</b> letters</span> <input type="checkbox" id="include-upper" checked></label>
+                                <label><span>Include <b>numbers</b></span> <input type="checkbox" id="include-numbers" checked></label>
+                                <label><span>Include <b>symbols (!#$%&*+-=?@^_{}[]()/'"`~,;:.<>\)</b></span> <input type="checkbox" id="include-symbols" checked></label>
+                            </div>
+                            <button class="password-generate-btn" onclick="generatePassword()">Generate</button>
+                            <p class="password-result"><strong>Password:</strong> <span id="password-output"></span></p>
+                            <p class="password-result"><strong>Strength:</strong> <span id="password-strength"></span></p>
+                        </div>
+                        <div class="section mt-20">
+                            <h2>QR Code Generator</h2>
+                            <input type="text" id="qr-input" placeholder="Enter text or URL">
+                            <button onclick="generateQRCode()">Generate QR</button>
+                            <button onclick="downloadQRCode()">Download QR</button>
+                            <div class="mt-20" id="qr-output"></div>
+                        </div>
+                    </div>
+
+                    <div id="image-tools" class="tab-content">
+                        <div class="section">
+                            <h2>Resize Image</h2>
+                            <input type="file" id="imageInput" accept="image/*"><br>
+                            <label>Width: <input type="number" id="widthInput" min="10"></label>
+                            <label>Height: <input type="number" id="heightInput" min="10"></label>
+                            <button onclick="resizeImage()">Resize</button>
+                            <h3>Preview:</h3>
+                            <p id="originalSize"></p>
+                            <img id="preview" style="max-width: 100%; border: 1px solid #ddd;">
+                            <a id="downloadLink" style="display: none;" download="resized-image.png">Download Resized Image</a>
+
+                            <canvas id="canvas"></canvas>
+                        </div>
+                    </div>
+
+                    <div id="timestamp-tools" class="tab-content">
+                        <div class="section">
+                            <div class="section">
+                                <h2>Timestamp Converter</h2>
+                                <p><strong>Current Timestamp:</strong> <span id="current-timestamp"></span></p>
+                                <label>Enter Timestamp:
+                                    <input type="number" id="timestamp-input" placeholder="Enter UNIX timestamp">
+                                </label>
+                                <label>Search Timezone:
+                                    <input type="text" id="timezone-search" placeholder="Search timezone...">
+                                </label>
+                                <label>Select Timezone:
+                                    <select id="timezone-select" size="5"></select>
+                                </label>
+                                <button onclick="convertTimestamp()">Convert</button>
+                                <p><strong>Converted Time:</strong> <span id="timestamp-output"></span></p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="php-tools" class="tab-content">
+                        <div class="section">
+                            <div class="section">
+                                <h2>PHP Code Runner</h2>
+                                <div style="display: flex; flex-direction: column; gap: 10px;">
+                                    <div id="monaco-container" style="height: 300px; border: 1px solid #ddd;"></div>
+                                    <button onclick="runPHPCode()">Run PHP</button>
+                                    <pre id="php-output" style="background: #282c34; color: white; padding: 10px; border-radius: 5px;"></pre>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="ip-tools" class="tab-content">
+                        <div class="section">
+                            <h2>Get IP</h2>
+                            <input type="text" id="ip-input" placeholder="Paste IP Address here">
+                            <button onclick="getIpInfo()">Get Info</button>
+                            <pre class="output" id="ip-output"></pre>
+                        </div>
+                    </div>
+
+                    <div id="payment-tools" class="tab-content">
+                        <div class="section">
+                            <h2>Payment Tools</h2>
+                            <div class="card-list">
+                                <div class="card-item" onclick="copySingleToClipboard(this, '4242424242424242')">Visa: 4242 4242 4242 4242 <span class="copied-message">Copied!</span></div>
+                                <div class="card-item" onclick="copySingleToClipboard(this, '5555555555554444')">Mastercard: 5555 5555 5555 4444 <span class="copied-message">Copied!</span></div>
+                                <div class="card-item" onclick="copySingleToClipboard(this, '4000002500003155')">3D Secure: 4000 0025 0000 3155 <span class="copied-message">Copied!</span></div>
+                                <div class="card-item" onclick="copySingleToClipboard(this, '4000000000000259')">Disputes (Fraudulent): 4000 0000 0000 0259 <span class="copied-message">Copied!</span></div>
+                                <div class="card-item" onclick="copySingleToClipboard(this, '4000000000007726')">Refunds: 4000 0000 0000 7726 <span class="copied-message">Copied!</span></div>
+                                <div class="card-item" onclick="copySingleToClipboard(this, '4000000000001208')">Captcha challenge: 4000 0000 0000 1208 <span class="copied-message">Copied!</span></div>
+                                <div class="card-item" onclick="copySingleToClipboard(this, '4000000000000341')">Decline after attaching: 4000 0000 0000 0341 <span class="copied-message">Copied!</span></div>
+                            </div>
+                            <input type="text" id="stripe-public-key" placeholder="Enter Stripe Public Key">
+                            <input type="text" id="stripe-client-secret" placeholder="Enter Client Secret">
+                            <button id="generate-stripe">Generate Form</button>
+                            <form id="payment-form">
+                                <div id="card-element"></div>
+                                <div id="card-errors" role="alert"></div>
+                                <button id="payment-form-btn" class="hidden" type="submit">Pay</button>
+                            </form>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </div>
-
-        <div id="ip-tools" class="tab-content">
-            <div class="section">
-                <h2>Get IP</h2>
-                <input type="text" id="ip-input" placeholder="Paste IP Address here">
-                <button onclick="getIpInfo()">Get Info</button>
-                <pre class="output" id="ip-output"></pre>
-            </div>
-        </div>
-
-        <div id="payment-tools" class="tab-content">
-            <div class="section">
-                <h2>Payment Tools</h2>
-                <div class="card-list">
-                    <div class="card-item" onclick="copySingleToClipboard(this, '4242424242424242')">Visa: 4242 4242 4242 4242 <span class="copied-message">Copied!</span></div>
-                    <div class="card-item" onclick="copySingleToClipboard(this, '5555555555554444')">Mastercard: 5555 5555 5555 4444 <span class="copied-message">Copied!</span></div>
-                    <div class="card-item" onclick="copySingleToClipboard(this, '4000002500003155')">3D Secure: 4000 0025 0000 3155 <span class="copied-message">Copied!</span></div>
-                    <div class="card-item" onclick="copySingleToClipboard(this, '4000000000000259')">Disputes (Fraudulent): 4000 0000 0000 0259 <span class="copied-message">Copied!</span></div>
-                    <div class="card-item" onclick="copySingleToClipboard(this, '4000000000007726')">Refunds: 4000 0000 0000 7726 <span class="copied-message">Copied!</span></div>
-                    <div class="card-item" onclick="copySingleToClipboard(this, '4000000000001208')">Captcha challenge: 4000 0000 0000 1208 <span class="copied-message">Copied!</span></div>
-                    <div class="card-item" onclick="copySingleToClipboard(this, '4000000000000341')">Decline after attaching: 4000 0000 0000 0341 <span class="copied-message">Copied!</span></div>
-                </div>
-                <input type="text" id="stripe-public-key" placeholder="Enter Stripe Public Key">
-                <input type="text" id="stripe-client-secret" placeholder="Enter Client Secret">
-                <button id="generate-stripe">Generate Form</button>
-                <form id="payment-form">
-                    <div id="card-element"></div>
-                    <div id="card-errors" role="alert"></div>
-                    <button id="payment-form-btn" class="hidden" type="submit">Pay</button>
-                </form>
-            </div>
+            </main>
         </div>
     </div>
 </body>

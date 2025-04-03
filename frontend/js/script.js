@@ -1,15 +1,23 @@
 // Reference: https://10015.io/tools/case-converter
 
-function openTab(event, tabId) {
-    document.querySelectorAll(".tab-content").forEach(tab => {
-        tab.classList.remove("active");
-    });
-    document.querySelectorAll(".tab-button").forEach(button => {
-        button.classList.remove("active");
-    });
+function openTab(evt, tabName) {
+    // Remove active class from all nav items
+    const navItems = document.getElementsByClassName("nav-item");
+    for (let i = 0; i < navItems.length; i++) {
+        navItems[i].classList.remove("active");
+    }
 
-    document.getElementById(tabId).classList.add("active");
-    event.currentTarget.classList.add("active");
+    // Add active class to clicked nav item
+    evt.currentTarget.classList.add("active");
+
+    // Hide all tab content
+    const tabContents = document.getElementsByClassName("tab-content");
+    for (let i = 0; i < tabContents.length; i++) {
+        tabContents[i].classList.remove("active");
+    }
+
+    // Show the selected tab content
+    document.getElementById(tabName).classList.add("active");
 }
 
 
