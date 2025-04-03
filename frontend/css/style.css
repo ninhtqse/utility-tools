@@ -705,3 +705,23 @@ canvas { display: none; }
 .download-btn:hover {
     background: rgba(0, 0, 0, 0.05);
 }
+
+.output-container .copy-btn {
+    position: absolute;
+    top: 0.2rem;
+    right: 0.1rem;
+    background: var(--primary-color);
+    color: white;
+    border: none;
+    padding: 0.25rem 0.5rem;
+    font-size: 0.875rem;
+    border-radius: 0.25rem;
+    cursor: pointer;
+    opacity: 0.8;
+    transition: opacity 0.2s;
+}
+
+.output-container .copy-btn:hover {
+    opacity: 1;
+    background: var(--primary-hover);
+}
