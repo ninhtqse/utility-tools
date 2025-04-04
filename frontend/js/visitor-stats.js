@@ -24,6 +24,31 @@ document.addEventListener('DOMContentLoaded', () => {
         // Track visitor when tab changes
         trackVisitor();
     });
+
+    // Add search functionality
+    const searchInput = document.getElementById('visitor-search');
+    if (searchInput) {
+        searchInput.addEventListener('input', function(e) {
+            const searchTerm = e.target.value.toLowerCase();
+            const rows = document.getElementById('visitor-stats-body').getElementsByTagName('tr');
+            
+            Array.from(rows).forEach(row => {
+                const ip = row.cells[0].textContent.toLowerCase();
+                const userAgent = row.cells[1].textContent.toLowerCase();
+                const page = row.cells[2].textContent.toLowerCase();
+                const fingerprint = row.cells[3].getAttribute('title').toLowerCase();
+                const timestamp = row.cells[4].textContent.toLowerCase();
+                
+                const matches = ip.includes(searchTerm) || 
+                              userAgent.includes(searchTerm) || 
+                              page.includes(searchTerm) ||
+                              fingerprint.includes(searchTerm) ||
+                              timestamp.includes(searchTerm);
+                              
+                row.style.display = matches ? '' : 'none';
+            });
+        });
+    }
 });
 
 // Track visitor
@@ -132,6 +157,9 @@ function displayVisitors(visitors) {
     const tbody = document.getElementById('visitor-stats-body');
     tbody.innerHTML = '';
 
+    // Sort visitors by timestamp in descending order (newest first)
+    visitors.sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
+
     visitors.forEach(visitor => {
         const row = document.createElement('tr');
         const fingerprint = visitor.fingerprint || 'Unknown';
@@ -147,23 +175,6 @@ function displayVisitors(visitors) {
 }
 
 // Search and sort functionality
-document.getElementById('visitor-search').addEventListener('input', function(e) {
-    const searchTerm = e.target.value.toLowerCase();
-    const rows = document.getElementById('visitor-stats-body').getElementsByTagName('tr');
-    
-    Array.from(rows).forEach(row => {
-        const ip = row.cells[0].textContent.toLowerCase();
-        const userAgent = row.cells[1].textContent.toLowerCase();
-        const page = row.cells[2].textContent.toLowerCase();
-        const fingerprint = row.cells[3].getAttribute('title').toLowerCase();
-        const matches = ip.includes(searchTerm) || 
-                        userAgent.includes(searchTerm) || 
-                        page.includes(searchTerm) ||
-                        fingerprint.includes(searchTerm);
-        row.style.display = matches ? '' : 'none';
-    });
-});
-
 document.getElementById('visitor-sort').addEventListener('change', function(e) {
     const tbody = document.getElementById('visitor-stats-body');
     const rows = Array.from(tbody.getElementsByTagName('tr'));
