@@ -1141,3 +1141,98 @@ canvas { display: none; }
     color: #666;
     font-family: 'Fira Code', monospace;
 }
+
+/* Visitor Statistics Styles */
+.stats-container {
+    padding: 20px;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.stats-filters {
+    margin-bottom: 20px;
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.stats-filters input {
+    flex: 1;
+    min-width: 200px;
+}
+
+.stats-filters select {
+    width: auto;
+    min-width: 150px;
+}
+
+.stats-filters input,
+.stats-filters select {
+    padding: 8px 12px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+.stats-table-container {
+    overflow-x: auto;
+    margin: 0 -20px;
+    padding: 0 20px;
+}
+
+.stats-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+    min-width: 800px;
+}
+
+.stats-table th,
+.stats-table td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #eee;
+    white-space: nowrap;
+}
+
+.stats-table th {
+    background-color: #f8f9fa;
+    font-weight: 600;
+    color: #333;
+    position: sticky;
+    top: 0;
+    z-index: 1;
+}
+
+.stats-table tr:hover {
+    background-color: #f5f5f5;
+}
+
+.stats-table td {
+    font-size: 14px;
+    color: #666;
+    max-width: 300px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.stats-table td:first-child {
+    font-family: monospace;
+    color: #0066cc;
+}
+
+.stats-table td:nth-child(2) {
+    max-width: 200px;
+}
+
+.stats-table td:nth-child(3),
+.stats-table td:nth-child(4) {
+    min-width: 100px;
+}
+
+.stats-table td:last-child {
+    color: #888;
+    font-size: 13px;
+    min-width: 150px;
+}

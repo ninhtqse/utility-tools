@@ -13,6 +13,13 @@
     <script src="js/lib/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.41.0/min/vs/loader.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@fingerprintjs/fingerprintjs@3/dist/fp.min.js"></script>
+    <script src="js/script.js"></script>
+    <script>
+        // Make openTab function available globally
+        window.openTab = openTab;
+    </script>
+    <script src="js/visitor-stats.js"></script>
 </head>
 <body>
     <div class="app-container">
@@ -89,6 +96,10 @@
                     <button class="nav-item" onclick="openTab(event, 'payment-tools')">
                         <i class="fas fa-credit-card"></i>
                         <span>Payment Tools</span>
+                    </button>
+                    <button class="nav-item" onclick="openTab(event, 'visitor-stats')">
+                        <i class="fas fa-chart-line"></i>
+                        <span>Visitor Statistics</span>
                     </button>
                 </div>
             </nav>
@@ -481,6 +492,29 @@
                                 <div id="card-errors" role="alert"></div>
                                 <button id="payment-form-btn" class="hidden" type="submit">Pay</button>
                             </form>
+                        </div>
+                    </div>
+
+                    <div id="visitor-stats" class="tab-content">
+                        <div class="section">
+                            <h2>Visitor Statistics</h2>
+                            <div class="stats-container">
+                                <div class="stats-table-container">
+                                    <table class="stats-table">
+                                        <thead>
+                                            <tr>
+                                                <th>IP Address</th>
+                                                <th>User Agent</th>
+                                                <th>Page</th>
+                                                <th>Fingerprint</th>
+                                                <th>Timestamp</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="visitor-stats-body">
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>

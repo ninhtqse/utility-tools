@@ -18,6 +18,15 @@ function openTab(evt, tabName) {
 
     // Show the selected tab content
     document.getElementById(tabName).classList.add("active");
+    
+    // Update URL without page reload
+    const url = new URL(window.location);
+    url.searchParams.set('tab', tabName);
+    window.history.pushState({}, '', url);
+    
+    // Trigger a custom event for tab change
+    const event = new CustomEvent('tabChanged', { detail: { tabName } });
+    document.dispatchEvent(event);
 }
 
 

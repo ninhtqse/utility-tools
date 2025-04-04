@@ -7,9 +7,23 @@ const cors = require('cors');
 const FingerprintJS = require('@fingerprintjs/fingerprintjs');
 const cronstrue = require('cronstrue');
 const axios = require("axios");
+const fs = require('fs');
+const path = require('path');
 
 const app = express();
 const port = 3000;
+
+// Create visitors directory if it doesn't exist
+const visitorsDir = path.join(__dirname, 'visitors');
+if (!fs.existsSync(visitorsDir)) {
+    fs.mkdirSync(visitorsDir);
+}
+
+// Create visitors.json file if it doesn't exist
+const visitorsFile = path.join(visitorsDir, 'visitors.json');
+if (!fs.existsSync(visitorsFile)) {
+    fs.writeFileSync(visitorsFile, JSON.stringify([]));
+}
 
 app.use(cors());
 app.use(bodyParser.json());
@@ -151,6 +165,54 @@ app.post("/run-code", async (req, res) => {
     } catch (error) {
         console.error('Code execution error:', error);
         res.status(500).json({ error: "Failed to execute code" });
+    }
+});
+
+// Track visitor
+app.post('/track-visitor', (req, res) => {
+    try {
+        const { ip, userAgent, page, api, fingerprint } = req.body;
+        const timestamp = new Date().toISOString();
+        
+        // Read existing visitors
+        let visitors = [];
+        try {
+            const fileContent = fs.readFileSync(visitorsFile, 'utf8');
+            visitors = JSON.parse(fileContent);
+        } catch (error) {
+            console.error('Error reading visitors file:', error);
+            // If file doesn't exist or is invalid, start with empty array
+            visitors = [];
+        }
+        
+        // Add new visitor
+        visitors.push({
+            ip: ip || 'Unknown',
+            userAgent: userAgent || 'Unknown',
+            page: page || 'Unknown',
+            api: api || 'None',
+            fingerprint: fingerprint || 'Unknown',
+            timestamp: timestamp
+        });
+        
+        // Write back to file
+        fs.writeFileSync(visitorsFile, JSON.stringify(visitors, null, 2));
+        
+        res.json({ success: true });
+    } catch (error) {
+        console.error('Error tracking visitor:', error);
+        res.status(500).json({ error: 'Failed to track visitor' });
+    }
+});
+
+// Get visitors statistics
+app.get('/visitors', (req, res) => {
+    try {
+        const visitors = JSON.parse(fs.readFileSync(visitorsFile, 'utf8'));
+        res.json(visitors);
+    } catch (error) {
+        console.error('Error getting visitors:', error);
+        res.status(500).json({ error: 'Failed to get visitors' });
     }
 });
 
