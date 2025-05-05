@@ -88,7 +88,7 @@ function updateClocks() {
     document.querySelector('#clock-jp .time').textContent = jpTime.format('HH:mm DD/MM');
     
     // US (UTC-5)
-    const usTime = now.clone().tz('America/New_York');
+    const usTime = now.clone().tz('America/Chicago');
     document.querySelector('#clock-us .time').textContent = usTime.format('HH:mm DD/MM');
 }
 
