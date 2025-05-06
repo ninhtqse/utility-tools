@@ -484,11 +484,17 @@
                             </div>
                             <input type="text" id="stripe-public-key" placeholder="Enter Stripe Public Key">
                             <input type="text" id="stripe-client-secret" placeholder="Enter Client Secret">
-                            <button id="generate-stripe">Generate Form</button>
+                            <button id="generate-stripe">Payment Intent</button>
+                            <button id="generate-setup-intent">Setup Intent</button>
                             <form id="payment-form">
                                 <div id="card-element"></div>
                                 <div id="card-errors" role="alert"></div>
                                 <button id="payment-form-btn" class="hidden" type="submit">Pay</button>
+                            </form>
+                            <form id="setup-form">
+                                <div id="setup-card-element"></div>
+                                <div id="setup-card-errors" role="alert"></div>
+                                <button id="setup-form-btn" class="hidden" type="submit">Attach Card</button>
                             </form>
                         </div>
                     </div>
@@ -540,7 +546,7 @@
     <script src="js/crontab.js?v=1743750847"></script>
     <script src="js/regex.js?v=1743750847"></script>
     <script src="js/hashing.js?v=1743750847"></script>
-    <script src="js/payment.js?v=1743750847" defer></script>
+    <script src="js/payment.js?v=1743750849" defer></script>
     <script src="js/text.js?v=1743750847" defer></script>
     <script src="js/miscellaneous.js?v=1743750847" defer></script>
     <script src="js/image.js?v=1743750847" defer></script>

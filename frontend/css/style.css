@@ -272,7 +272,7 @@ pre {
     border-radius: 4px;
 }
 
-#payment-form {
+#payment-form, #setup-form {
     max-width: 400px;
     margin: auto;
 }
