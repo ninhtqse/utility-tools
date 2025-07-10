@@ -131,7 +131,7 @@ async function hashEncryptPkcs7() {
     const output = document.getElementById('encryptPkcs7-output');
     output.innerText = 'Encoding...';
     try {
-        const res = await fetch('http://localhost:3000/encrypt-pkcs7', {
+        const res = await fetch('https://api-utility.ninhtqse.site/encrypt-pkcs7', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ accessKey })
