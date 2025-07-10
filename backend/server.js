@@ -216,6 +216,44 @@ app.get('/visitors', (req, res) => {
     }
 });
 
+app.post('/encrypt-pkcs7', (req, res) => {
+    try {
+        const { accessKey } = req.body;
+        if (!accessKey) {
+            return res.status(400).json({ error: 'accessKey are required' });
+        }
+
+        function getCurrentUTCTimeString() {
+            const now = new Date();
+            const pad = n => n.toString().padStart(2, '0');
+            const month = pad(now.getUTCMonth() + 1);
+            const day = pad(now.getUTCDate());
+            const year = now.getUTCFullYear();
+            let hour = now.getUTCHours();
+            const minute = pad(now.getUTCMinutes());
+            const second = pad(now.getUTCSeconds());
+            const ampm = hour >= 12 ? 'PM' : 'AM';
+            hour = hour % 12;
+            if (hour === 0) hour = 12;
+            hour = pad(hour);
+            return `${month}/${day}/${year} ${hour}:${minute}:${second} ${ampm}`;
+        }
+
+        const dateNow = getCurrentUTCTimeString();
+        const md5 = crypto.createHash('md5').update(accessKey, 'utf8').digest();
+        const key = Buffer.concat([md5, md5.slice(0, 8)]); // 24 bytes
+        const cipher = crypto.createCipheriv('des-ede3', key, null);
+        cipher.setAutoPadding(true);
+        let encrypted = cipher.update(dateNow, 'utf8', 'base64');
+        encrypted += cipher.final('base64');
+        const result = Buffer.from(`${accessKey}:${encrypted}`).toString('base64');
+        res.json({ result });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: 'Encryption failed' });
+    }
+});
+
 // Start Server
 app.listen(port, () => {
     console.log(`Server running on http://localhost:${port}`);

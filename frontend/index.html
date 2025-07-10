@@ -15,10 +15,6 @@
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.41.0/min/vs/loader.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@fingerprintjs/fingerprintjs@3/dist/fp.min.js"></script>
-    <script>
-        // Make openTab function available globally
-        window.openTab = openTab;
-    </script>
 </head>
 <body>
     <div class="app-container">
@@ -176,6 +172,12 @@
                             <input type="text" id="sha256-input" placeholder="Enter text">
                             <button onclick="hashSHA256()">Hash</button>
                             <pre class="output" id="sha256-output"></pre>
+                        </div>
+                        <div class="section">
+                            <h2>EncryptPkcs7 Hash</h2>
+                            <input type="text" id="encryptPkcs7-input" placeholder="Enter text">
+                            <button onclick="hashEncryptPkcs7()">Hash</button>
+                            <pre class="output" id="encryptPkcs7-output"></pre>
                         </div>
                     </div>
 
@@ -546,7 +548,7 @@
     <script src="js/uuid.js?v=1743750847"></script>
     <script src="js/crontab.js?v=1743750847"></script>
     <script src="js/regex.js?v=1743750847"></script>
-    <script src="js/hashing.js?v=1743750847"></script>
+    <script src="js/hashing.js?v=1752140243"></script>
     <script src="js/payment.js?v=1743750849" defer></script>
     <script src="js/text.js?v=1743750847" defer></script>
     <script src="js/miscellaneous.js?v=1743750847" defer></script>

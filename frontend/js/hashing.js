@@ -120,3 +120,29 @@ function decodeURL() {
         alert('Invalid encoded URL');
     }
 }
+
+// --- UI handler for EncryptPkcs7 Hash ---
+async function hashEncryptPkcs7() {
+    const accessKey = document.getElementById('encryptPkcs7-input').value;
+    if (!accessKey) {
+        alert('Please enter secret key');
+        return;
+    }
+    const output = document.getElementById('encryptPkcs7-output');
+    output.innerText = 'Encoding...';
+    try {
+        const res = await fetch('http://localhost:3000/encrypt-pkcs7', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ accessKey })
+        });
+        const data = await res.json();
+        if (data.result) {
+            output.innerText = data.result;
+        } else {
+            output.innerText = 'Error: ' + (data.error || 'Not determined');
+        }
+    } catch (err) {
+        output.innerText = 'Server connection error';
+    }
+}
