@@ -7,6 +7,7 @@ const cors = require('cors');
 const FingerprintJS = require('@fingerprintjs/fingerprintjs');
 const cronstrue = require('cronstrue');
 const axios = require("axios");
+const cheerio = require("cheerio");
 const fs = require('fs');
 const path = require('path');
 
@@ -251,6 +252,68 @@ app.post('/encrypt-pkcs7', (req, res) => {
     } catch (error) {
         console.error(error);
         res.status(500).json({ error: 'Encryption failed' });
+    }
+});
+
+app.get('/p2p', async (req, res) => {
+    try {
+        const response = await axios.post('https://p2p.binance.com/bapi/c2c/v2/friendly/c2c/adv/search', {
+            fiat: "VND",
+            page: 1,
+            rows: 10,
+            tradeType: "BUY",
+            asset: "USDT",
+            countries: [],
+            proMerchantAds: false,
+            shieldMerchantAds: false,
+            filterType: "tradable",
+            periods: [],
+            additionalKycVerifyFilter: 0,
+            publisherType: "merchant",
+            payTypes: [],
+            classifies: [
+                "mass",
+                "profession",
+                "fiat_trade"
+            ],
+            tradedWith: false,
+            followed: false,
+            transAmount: 5000000
+        });
+        res.json({
+            price: response.data.data?.[1].adv.price
+        });
+    } catch (error) {
+        res.status(500).json({ error: 'Failed to get p2p' });
+    }
+});
+
+
+app.get('/sliver', async (req, res) => {
+    try {
+        const url = 'https://giabac.vn/SilverInfo/FilterData';
+        const response = await fetch(url, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
+            },
+            body: 'filterType=%23pills-profile'
+        });
+
+        const html = await response.text();
+
+        const $ = cheerio.load(html);
+
+        const buyPrice = $("#priceDiv .text-red").text().trim();
+
+        const sellPrice = $("#priceDiv .text-green").text().trim();
+
+        res.json({
+            buy: buyPrice,
+            sell: sellPrice,
+        });
+    } catch (error) {
+        res.status(500).json({ error: 'Failed to get sliver' });
     }
 });
 
