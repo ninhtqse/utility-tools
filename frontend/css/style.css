@@ -1310,3 +1310,216 @@ td[title]:hover::after {
     z-index: 1000;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
+
+/* Advertisement Styles */
+.ad-container {
+    width: 160px;
+    min-height: 100vh;
+    position: relative;
+}
+
+.ad-left {
+    order: -1;
+    margin-right: 20px;
+}
+
+.ad-right {
+    order: 3;
+    margin-left: 20px;
+}
+
+.ad-sticky {
+    position: sticky;
+    top: 100px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.ad-unit {
+    width: 160px;
+    min-height: 600px;
+    background: var(--bg-color);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #999;
+    font-size: 12px;
+    text-align: center;
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+.ad-unit:empty::before {
+    content: "Advertisement\A160x600";
+    white-space: pre;
+    opacity: 0.5;
+}
+
+/* Responsive - Hide ads on smaller screens */
+@media (max-width: 1200px) {
+    .ad-container {
+        display: none;
+    }
+    
+    .main-content {
+        justify-content: center;
+    }
+}
+
+/* Header Banner Ad */
+.header-ad {
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+}
+
+.banner-ad {
+    width: 728px;
+    height: 90px;
+    background: var(--bg-color);
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #999;
+    font-size: 12px;
+}
+
+.banner-ad:empty::before {
+    content: "Banner 728x90";
+}
+
+.banner-ad:not(:empty) {
+    background: transparent;
+    border: none;
+    padding: 0;
+}
+
+/* Native Banner Ad */
+.native-ad-container {
+    margin-bottom: 1.5rem;
+}
+
+.native-ad {
+    width: 100%;
+    min-height: 120px;
+    background: var(--bg-color);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #999;
+    font-size: 12px;
+}
+
+.native-ad:empty::before {
+    content: "Native Banner";
+}
+
+.native-ad:not(:empty) {
+    background: transparent;
+    border: none;
+    padding: 0;
+}
+
+/* Social Bar Ad */
+.social-bar-ad {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 60px;
+    background: white;
+    border-top: 1px solid var(--border-color);
+    box-shadow: 0 -2px 4px rgba(0,0,0,0.1);
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #999;
+    font-size: 12px;
+}
+
+.social-bar-ad:empty::before {
+    content: "Social Bar";
+}
+
+/* Medium Rectangle Banner 300x250 */
+.medium-banner-container {
+    display: flex;
+    justify-content: center;
+    margin: 1.5rem 0;
+}
+
+.medium-banner-ad {
+    width: 300px;
+    height: 250px;
+    background: var(--bg-color);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #999;
+    font-size: 12px;
+}
+
+.medium-banner-ad:empty::before {
+    content: "Banner 300x250";
+}
+
+.medium-banner-ad:not(:empty) {
+    background: transparent;
+    border: none;
+    padding: 0;
+}
+
+/* Horizontal Banner 468x60 */
+.horizontal-banner-container {
+    display: flex;
+    justify-content: center;
+    margin: 2rem 0;
+}
+
+.horizontal-banner-ad {
+    width: 468px;
+    height: 60px;
+    background: var(--bg-color);
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #999;
+    font-size: 12px;
+}
+
+.horizontal-banner-ad:empty::before {
+    content: "Banner 468x60";
+}
+
+/* Mobile responsive */
+@media (max-width: 768px) {
+    .banner-ad {
+        width: 320px;
+        height: 50px;
+    }
+    
+    .banner-ad:empty::before {
+        content: "Mobile Banner 320x50";
+    }
+    
+    .horizontal-banner-ad {
+        width: 320px;
+        height: 50px;
+    }
+    
+    .horizontal-banner-ad:empty::before {
+        content: "Mobile Banner 320x50";
+    }
+}
