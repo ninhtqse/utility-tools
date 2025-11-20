@@ -1,5 +1,5 @@
 async function fetchUUID() {
-    const res = await fetch('https://api-utility.ninhtqse.site/uuid');
+    const res = await fetch('https://utility-api.ninhtqse.xyz/uuid');
     const data = await res.json();
     document.getElementById('uuid').innerText = data.uuid;
 }

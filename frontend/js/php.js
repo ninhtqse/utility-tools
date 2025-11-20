@@ -11,7 +11,7 @@ require(["vs/editor/editor.main"], function () {
 async function runPHPCode() {
     const code = phpEditor.getValue();
 
-    const response = await fetch("https://api-utility.ninhtqse.site/run-php", {
+    const response = await fetch("https://utility-api.ninhtqse.xyz/run-php", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ code })

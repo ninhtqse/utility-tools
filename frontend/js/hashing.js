@@ -1,6 +1,6 @@
 async function hashSHA256() {
     const text = document.getElementById('sha256-input').value;
-    const res = await fetch('https://api-utility.ninhtqse.site/sha256', {
+    const res = await fetch('https://utility-api.ninhtqse.xyz/sha256', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -15,7 +15,7 @@ async function hashSHA256() {
 
 async function hashMD5() {
     const password = document.getElementById('md5-input').value;
-    const res = await fetch('https://api-utility.ninhtqse.site/md5', {
+    const res = await fetch('https://utility-api.ninhtqse.xyz/md5', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -30,7 +30,7 @@ async function hashMD5() {
 
 async function hashBcrypt() {
     const password = document.getElementById('bcrypt-input').value;
-    const res = await fetch('https://api-utility.ninhtqse.site/bcrypt', {
+    const res = await fetch('https://utility-api.ninhtqse.xyz/bcrypt', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -45,7 +45,7 @@ async function hashBcrypt() {
 
 function encodeBase64() {
     const text = document.getElementById("base64-input").value;
-    fetch("https://api-utility.ninhtqse.site/base64/encode", {
+    fetch("https://utility-api.ninhtqse.xyz/base64/encode", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
@@ -61,7 +61,7 @@ function encodeBase64() {
 
 function decodeBase64() {
     const text = document.getElementById("base64-input").value;
-    fetch("https://api-utility.ninhtqse.site/base64/decode", {
+    fetch("https://utility-api.ninhtqse.xyz/base64/decode", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
@@ -131,7 +131,7 @@ async function hashEncryptPkcs7() {
     const output = document.getElementById('encryptPkcs7-output');
     output.innerText = 'Encoding...';
     try {
-        const res = await fetch('https://api-utility.ninhtqse.site/encrypt-pkcs7', {
+        const res = await fetch('https://utility-api.ninhtqse.xyz/encrypt-pkcs7', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ accessKey })

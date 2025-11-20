@@ -1,6 +1,6 @@
 async function convertCrontab() {
     const cronInput = document.getElementById('crontab-input').value;
-    const res = await fetch('https://api-utility.ninhtqse.site/crontab', {
+    const res = await fetch('https://utility-api.ninhtqse.xyz/crontab', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ cron: cronInput })

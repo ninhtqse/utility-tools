@@ -55,7 +55,7 @@ async function runCode() {
     try {
         outputArea.innerHTML = '<div class="text-center"><div class="spinner-border text-primary" role="status"><span class="visually-hidden">Loading...</span></div></div>';
 
-        const response = await fetch('https://api-utility.ninhtqse.site/run-code', {
+        const response = await fetch('https://utility-api.ninhtqse.xyz/run-code', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'

@@ -8,7 +8,7 @@ async function formatJSON() {
     output.style.display = 'block';
     
     try {
-        const res = await fetch('https://api-utility.ninhtqse.site/json', {
+        const res = await fetch('https://utility-api.ninhtqse.xyz/json', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ json: jsonInput })
@@ -30,7 +30,7 @@ async function minifyJSON() {
     output.style.display = 'block';
     
     try {
-        const res = await fetch('https://api-utility.ninhtqse.site/json/minify', {
+        const res = await fetch('https://utility-api.ninhtqse.xyz/json/minify', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ json: jsonInput })

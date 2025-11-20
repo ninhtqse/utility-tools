@@ -61,7 +61,7 @@ async function trackVisitor() {
         const fingerprint = await getFingerprint();
         console.log('Sending fingerprint to server:', fingerprint); // Debug log
         
-        const response = await fetch('https://api-utility.ninhtqse.site/track-visitor', {
+        const response = await fetch('https://utility-api.ninhtqse.xyz/track-visitor', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -144,7 +144,7 @@ async function getClientIP() {
 // Load visitor statistics
 async function loadVisitorStats() {
     try {
-        const response = await fetch('https://api-utility.ninhtqse.site/visitors');
+        const response = await fetch('https://utility-api.ninhtqse.xyz/visitors');
         const visitors = await response.json();
         displayVisitors(visitors);
     } catch (error) {
